@@ -1,0 +1,6 @@
+Game Project improvements
+
+Add last starting position to keep progress. 
+Show number of enemies left to defeat.
+Create lives and once all lives are gone then start from beginning of the map.
+Create and option after rage quit to save your level into memory slot.
