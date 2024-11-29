@@ -6,7 +6,7 @@ import audio.AudioPlayer;
 import gamestates.*;
 import ui.AudioOptions;
 
-public class Game implements Runnable {
+public class FlappyGame implements Runnable {
 
     private GamePanel gamePanel;
     private Thread gameThread;
@@ -31,7 +31,7 @@ public class Game implements Runnable {
 
     private final boolean SHOW_FPS_UPS = true;
 
-    public Game() {
+    public FlappyGame() {
         System.out.println("size: " + GAME_WIDTH + " : " + GAME_HEIGHT);
         initClasses();
         gamePanel = new GamePanel(this);

@@ -4,19 +4,19 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import main.Game;
-import utilz.LoadSave;
+import main.FlappyGame;
+import utils.LoadSave;
 
 public class LevelManager {
 
-	private Game game;
+	private FlappyGame flappyGame;
 	private BufferedImage[] levelSprite;
 	private BufferedImage[] waterSprite;
 	private ArrayList<Level> levels;
 	private int lvlIndex = 0, aniTick, aniIndex;
 
-	public LevelManager(Game game) {
-		this.game = game;
+	public LevelManager(FlappyGame flappyGame) {
+		this.flappyGame = flappyGame;
 		importOutsideSprites();
 		createWater();
 		levels = new ArrayList<>();
@@ -33,10 +33,10 @@ public class LevelManager {
 
 	public void loadNextLevel() {
 		Level newLevel = levels.get(lvlIndex);
-		game.getPlaying().getEnemyManager().loadEnemies(newLevel);
-		game.getPlaying().getPlayer().loadLvlData(newLevel.getLevelData());
-		game.getPlaying().setMaxLvlOffset(newLevel.getLvlOffset());
-		game.getPlaying().getObjectManager().loadObjects(newLevel);
+		flappyGame.getPlaying().getEnemyManager().loadEnemies(newLevel);
+		flappyGame.getPlaying().getPlayer().loadLvlData(newLevel.getLevelData());
+		flappyGame.getPlaying().setMaxLvlOffset(newLevel.getLvlOffset());
+		flappyGame.getPlaying().getObjectManager().loadObjects(newLevel);
 	}
 
 	private void buildAllLevels() {
@@ -56,17 +56,17 @@ public class LevelManager {
 	}
 
 	public void draw(Graphics g, int lvlOffset) {
-		for (int j = 0; j < Game.TILES_IN_HEIGHT; j++)
+		for (int j = 0; j < FlappyGame.TILES_IN_HEIGHT; j++)
 			for (int i = 0; i < levels.get(lvlIndex).getLevelData()[0].length; i++) {
 				int index = levels.get(lvlIndex).getSpriteIndex(i, j);
-				int x = Game.TILES_SIZE * i - lvlOffset;
-				int y = Game.TILES_SIZE * j;
+				int x = FlappyGame.TILES_SIZE * i - lvlOffset;
+				int y = FlappyGame.TILES_SIZE * j;
 				if (index == 48)
-					g.drawImage(waterSprite[aniIndex], x, y, Game.TILES_SIZE, Game.TILES_SIZE, null);
+					g.drawImage(waterSprite[aniIndex], x, y, FlappyGame.TILES_SIZE, FlappyGame.TILES_SIZE, null);
 				else if (index == 49)
-					g.drawImage(waterSprite[4], x, y, Game.TILES_SIZE, Game.TILES_SIZE, null);
+					g.drawImage(waterSprite[4], x, y, FlappyGame.TILES_SIZE, FlappyGame.TILES_SIZE, null);
 				else
-					g.drawImage(levelSprite[index], x, y, Game.TILES_SIZE, Game.TILES_SIZE, null);
+					g.drawImage(levelSprite[index], x, y, FlappyGame.TILES_SIZE, FlappyGame.TILES_SIZE, null);
 			}
 	}
 

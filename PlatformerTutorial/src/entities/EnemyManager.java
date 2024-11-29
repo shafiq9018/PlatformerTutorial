@@ -6,8 +6,8 @@ import java.awt.image.BufferedImage;
 
 import gamestates.Playing;
 import levels.Level;
-import utilz.LoadSave;
-import static utilz.Constants.EnemyConstants.*;
+import utils.LoadSave;
+import static utils.Constants.EnemyConstants.*;
 
 public class EnemyManager {
 

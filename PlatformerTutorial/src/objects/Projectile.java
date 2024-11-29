@@ -2,9 +2,9 @@ package objects;
 
 import java.awt.geom.Rectangle2D;
 
-import main.Game;
+import main.FlappyGame;
 
-import static utilz.Constants.Projectiles.*;
+import static utils.Constants.Projectiles.*;
 
 public class Projectile {
 	private Rectangle2D.Float hitbox;
@@ -12,11 +12,11 @@ public class Projectile {
 	private boolean active = true;
 
 	public Projectile(int x, int y, int dir) {
-		int xOffset = (int) (-3 * Game.SCALE);
-		int yOffset = (int) (5 * Game.SCALE);
+		int xOffset = (int) (-3 * FlappyGame.SCALE);
+		int yOffset = (int) (5 * FlappyGame.SCALE);
 
 		if (dir == 1)
-			xOffset = (int) (29 * Game.SCALE);
+			xOffset = (int) (29 * FlappyGame.SCALE);
 
 		hitbox = new Rectangle2D.Float(x + xOffset, y + yOffset, CANNON_BALL_WIDTH, CANNON_BALL_HEIGHT);
 		this.dir = dir;

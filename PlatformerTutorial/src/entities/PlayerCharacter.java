@@ -1,9 +1,9 @@
 package entities;
 
-import main.Game;
-import utilz.LoadSave;
+import main.FlappyGame;
+import utils.LoadSave;
 
-import static utilz.Constants.PlayerConstants.*;
+import static utils.Constants.PlayerConstants.*;
 
 public enum PlayerCharacter {
 
@@ -31,8 +31,8 @@ public enum PlayerCharacter {
 
 
     /*
-     private float xDrawOffset = 21 * Game.SCALE;
-    private float yDrawOffset = 4 * Game.SCALE;
+     private float xDrawOffset = 21 * FlappyGame.SCALE;
+    private float yDrawOffset = 4 * FlappyGame.SCALE;
      */
 
     PlayerCharacter(int spriteA_IDLE, int spriteA_RUNNING, int spriteA_JUMP, int spriteA_FALLING, int spriteA_ATTACK, int spriteA_HIT, int spriteA_DEAD,
@@ -66,8 +66,8 @@ public enum PlayerCharacter {
         this.hitboxW = hitboxW;
         this.hitboxH = hitboxH;
 
-        this.xDrawOffset = (int) (xDrawOffset * Game.SCALE);
-        this.yDrawOffset = (int) (yDrawOffset * Game.SCALE);
+        this.xDrawOffset = (int) (xDrawOffset * FlappyGame.SCALE);
+        this.yDrawOffset = (int) (yDrawOffset * FlappyGame.SCALE);
     }
 
     public int getSpriteAmount(int player_action) {

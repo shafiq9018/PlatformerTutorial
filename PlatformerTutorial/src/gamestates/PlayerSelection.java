@@ -1,17 +1,17 @@
 package gamestates;
 
 import entities.PlayerCharacter;
-import main.Game;
+import main.FlappyGame;
 import ui.MenuButton;
-import utilz.LoadSave;
+import utils.LoadSave;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-import static utilz.Constants.ANI_SPEED;
-import static utilz.Constants.PlayerConstants.IDLE;
+import static utils.Constants.ANI_SPEED;
+import static utils.Constants.PlayerConstants.IDLE;
 
 public class PlayerSelection extends State implements Statemethods {
 
@@ -23,8 +23,8 @@ public class PlayerSelection extends State implements Statemethods {
     private CharacterAnimation[] characterAnimations;
 
 
-    public PlayerSelection(Game game) {
-        super(game);
+    public PlayerSelection(FlappyGame flappyGame) {
+        super(flappyGame);
 
         loadButtons();
         loadBackground();
@@ -44,15 +44,15 @@ public class PlayerSelection extends State implements Statemethods {
 
     private void loadBackground() {
         backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.MENU_BACKGROUND);
-        menuWidth = (int) (backgroundImg.getWidth() * Game.SCALE);
-        menuHeight = (int) (backgroundImg.getHeight() * Game.SCALE);
-        menuX = Game.GAME_WIDTH / 2 - menuWidth / 2;
-        menuY = (int) (25 * Game.SCALE);
+        menuWidth = (int) (backgroundImg.getWidth() * FlappyGame.SCALE);
+        menuHeight = (int) (backgroundImg.getHeight() * FlappyGame.SCALE);
+        menuX = FlappyGame.GAME_WIDTH / 2 - menuWidth / 2;
+        menuY = (int) (25 * FlappyGame.SCALE);
     }
 
     private void loadButtons() {
 
-        playButton = new MenuButton(Game.GAME_WIDTH / 2, (int) (340 * Game.SCALE), 0, Gamestate.PLAYING);
+        playButton = new MenuButton(FlappyGame.GAME_WIDTH / 2, (int) (340 * FlappyGame.SCALE), 0, Gamestate.PLAYING);
 
     }
 
@@ -65,7 +65,7 @@ public class PlayerSelection extends State implements Statemethods {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(backgroundImgPink, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
+        g.drawImage(backgroundImgPink, 0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
         g.drawImage(backgroundImg, menuX, menuY, menuWidth, menuHeight, null);
 
         playButton.draw(g);
@@ -105,8 +105,8 @@ public class PlayerSelection extends State implements Statemethods {
         if (isIn(e, playButton)) {
             if (playButton.isMousePressed()) {
 
-                game.getPlaying().setPlayerCharacter(characterAnimations[playerIndex].getPc());
-                game.getAudioPlayer().setLevelSong(game.getPlaying().getLevelManager().getLevelIndex());
+                flappyGame.getPlaying().setPlayerCharacter(characterAnimations[playerIndex].getPc());
+                flappyGame.getAudioPlayer().setLevelSong(flappyGame.getPlaying().getLevelManager().getLevelIndex());
 
                 playButton.applyGamestate();
             }
@@ -168,7 +168,7 @@ public class PlayerSelection extends State implements Statemethods {
 
         public CharacterAnimation(PlayerCharacter pc) {
             this.pc = pc;
-            this.scale = (int) (Game.SCALE + 6);
+            this.scale = (int) (FlappyGame.SCALE + 6);
             animations = LoadSave.loadAnimations(pc);
         }
 

@@ -1,9 +1,9 @@
 package main;
 
-public class MainClass {
+public class FlappyMain {
 
 	public static void main(String[] args) {
-		new Game();
+		new FlappyGame();
 	}
 
 }

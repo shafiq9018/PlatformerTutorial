@@ -1,6 +1,6 @@
 package objects;
 
-import main.Game;
+import main.FlappyGame;
 
 public class Cannon extends GameObject {
 
@@ -8,10 +8,10 @@ public class Cannon extends GameObject {
 
 	public Cannon(int x, int y, int objType) {
 		super(x, y, objType);
-		tileY = y / Game.TILES_SIZE;
+		tileY = y / FlappyGame.TILES_SIZE;
 		initHitbox(40, 26);
-//		hitbox.x -= (int) (1 * Game.SCALE);
-		hitbox.y += (int) (6 * Game.SCALE);
+//		hitbox.x -= (int) (1 * FlappyGame.SCALE);
+		hitbox.y += (int) (6 * FlappyGame.SCALE);
 	}
 
 	public void update() {

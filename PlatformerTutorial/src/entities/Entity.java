@@ -1,15 +1,15 @@
 package entities;
 
-import static utilz.Constants.Directions.DOWN;
-import static utilz.Constants.Directions.LEFT;
-import static utilz.Constants.Directions.UP;
-import static utilz.HelpMethods.CanMoveHere;
+import static utils.Constants.Directions.DOWN;
+import static utils.Constants.Directions.LEFT;
+import static utils.Constants.Directions.UP;
+import static utils.HelpMethods.CanMoveHere;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 
-import main.Game;
+import main.FlappyGame;
 
 public abstract class Entity {
 
@@ -73,7 +73,7 @@ public abstract class Entity {
 	}
 
 	protected void initHitbox(int width, int height) {
-		hitbox = new Rectangle2D.Float(x, y, (int) (width * Game.SCALE), (int) (height * Game.SCALE));
+		hitbox = new Rectangle2D.Float(x, y, (int) (width * FlappyGame.SCALE), (int) (height * FlappyGame.SCALE));
 	}
 
 	public Rectangle2D.Float getHitbox() {

@@ -1,37 +1,37 @@
 package ui;
 
-import static utilz.Constants.UI.PauseButtons.SOUND_SIZE;
-import static utilz.Constants.UI.VolumeButtons.SLIDER_WIDTH;
-import static utilz.Constants.UI.VolumeButtons.VOLUME_HEIGHT;
+import static utils.Constants.UI.PauseButtons.SOUND_SIZE;
+import static utils.Constants.UI.VolumeButtons.SLIDER_WIDTH;
+import static utils.Constants.UI.VolumeButtons.VOLUME_HEIGHT;
 
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
-import main.Game;
+import main.FlappyGame;
 
 public class AudioOptions {
 
 	private VolumeButton volumeButton;
 	private SoundButton musicButton, sfxButton;
 
-	private Game game;
+	private FlappyGame flappyGame;
 
-	public AudioOptions(Game game) {
-		this.game = game;
+	public AudioOptions(FlappyGame flappyGame) {
+		this.flappyGame = flappyGame;
 		createSoundButtons();
 		createVolumeButton();
 	}
 
 	private void createVolumeButton() {
-		int vX = (int) (309 * Game.SCALE);
-		int vY = (int) (278 * Game.SCALE);
+		int vX = (int) (309 * FlappyGame.SCALE);
+		int vY = (int) (278 * FlappyGame.SCALE);
 		volumeButton = new VolumeButton(vX, vY, SLIDER_WIDTH, VOLUME_HEIGHT);
 	}
 
 	private void createSoundButtons() {
-		int soundX = (int) (450 * Game.SCALE);
-		int musicY = (int) (140 * Game.SCALE);
-		int sfxY = (int) (186 * Game.SCALE);
+		int soundX = (int) (450 * FlappyGame.SCALE);
+		int musicY = (int) (140 * FlappyGame.SCALE);
+		int sfxY = (int) (186 * FlappyGame.SCALE);
 		musicButton = new SoundButton(soundX, musicY, SOUND_SIZE, SOUND_SIZE);
 		sfxButton = new SoundButton(soundX, sfxY, SOUND_SIZE, SOUND_SIZE);
 	}
@@ -58,7 +58,7 @@ public class AudioOptions {
 			volumeButton.changeX(e.getX());
 			float valueAfter = volumeButton.getFloatValue();
 			if (valueBefore != valueAfter)
-				game.getAudioPlayer().setVolume(valueAfter);
+				flappyGame.getAudioPlayer().setVolume(valueAfter);
 		}
 	}
 
@@ -75,13 +75,13 @@ public class AudioOptions {
 		if (isIn(e, musicButton)) {
 			if (musicButton.isMousePressed()) {
 				musicButton.setMuted(!musicButton.isMuted());
-				game.getAudioPlayer().toggleSongMute();
+				flappyGame.getAudioPlayer().toggleSongMute();
 			}
 
 		} else if (isIn(e, sfxButton)) {
 			if (sfxButton.isMousePressed()) {
 				sfxButton.setMuted(!sfxButton.isMuted());
-				game.getAudioPlayer().toggleEffectMute();
+				flappyGame.getAudioPlayer().toggleEffectMute();
 			}
 		}
 

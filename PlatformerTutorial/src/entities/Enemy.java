@@ -1,23 +1,23 @@
 package entities;
 
-import static utilz.Constants.EnemyConstants.*;
-import static utilz.HelpMethods.*;
+import static utils.Constants.EnemyConstants.*;
+import static utils.HelpMethods.*;
 
 import java.awt.geom.Rectangle2D;
 
 import gamestates.Playing;
 
-import static utilz.Constants.Directions.*;
-import static utilz.Constants.*;
+import static utils.Constants.Directions.*;
+import static utils.Constants.*;
 
-import main.Game;
+import main.FlappyGame;
 
 public abstract class Enemy extends Entity {
 	protected int enemyType;
 	protected boolean firstUpdate = true;
 	protected int walkDir = LEFT;
 	protected int tileY;
-	protected float attackDistance = Game.TILES_SIZE;
+	protected float attackDistance = FlappyGame.TILES_SIZE;
 	protected boolean active = true;
 	protected boolean attackChecked;
 	protected int attackBoxOffsetX;
@@ -28,7 +28,7 @@ public abstract class Enemy extends Entity {
 
 		maxHealth = GetMaxHealth(enemyType);
 		currentHealth = maxHealth;
-		walkSpeed = Game.SCALE * 0.35f;
+		walkSpeed = FlappyGame.SCALE * 0.35f;
 	}
 
 	protected void updateAttackBox() {
@@ -46,8 +46,8 @@ public abstract class Enemy extends Entity {
 	}
 
 	protected void initAttackBox(int w, int h, int attackBoxOffsetX) {
-		attackBox = new Rectangle2D.Float(x, y, (int) (w * Game.SCALE), (int) (h * Game.SCALE));
-		this.attackBoxOffsetX = (int) (Game.SCALE * attackBoxOffsetX);
+		attackBox = new Rectangle2D.Float(x, y, (int) (w * FlappyGame.SCALE), (int) (h * FlappyGame.SCALE));
+		this.attackBoxOffsetX = (int) (FlappyGame.SCALE * attackBoxOffsetX);
 	}
 
 	protected void firstUpdateCheck(int[][] lvlData) {
@@ -72,7 +72,7 @@ public abstract class Enemy extends Entity {
 		} else {
 			inAir = false;
 			hitbox.y = GetEntityYPosUnderRoofOrAboveFloor(hitbox, airSpeed);
-			tileY = (int) (hitbox.y / Game.TILES_SIZE);
+			tileY = (int) (hitbox.y / FlappyGame.TILES_SIZE);
 		}
 	}
 
@@ -101,7 +101,7 @@ public abstract class Enemy extends Entity {
 	}
 
 	protected boolean canSeePlayer(int[][] lvlData, Player player) {
-		int playerTileY = (int) (player.getHitbox().y / Game.TILES_SIZE);
+		int playerTileY = (int) (player.getHitbox().y / FlappyGame.TILES_SIZE);
 		if (playerTileY == tileY)
 			if (isPlayerInRange(player)) {
 				if (IsSightClear(lvlData, hitbox, player.hitbox, tileY))

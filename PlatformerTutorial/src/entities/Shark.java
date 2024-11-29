@@ -1,10 +1,10 @@
 package entities;
 
-import static utilz.Constants.Dialogue.*;
-import static utilz.Constants.Directions.LEFT;
-import static utilz.Constants.EnemyConstants.*;
-import static utilz.HelpMethods.CanMoveHere;
-import static utilz.HelpMethods.IsFloor;
+import static utils.Constants.Dialogue.*;
+import static utils.Constants.Directions.LEFT;
+import static utils.Constants.EnemyConstants.*;
+import static utils.HelpMethods.CanMoveHere;
+import static utils.HelpMethods.IsFloor;
 
 import gamestates.Playing;
 

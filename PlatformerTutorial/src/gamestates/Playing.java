@@ -13,18 +13,18 @@ import entities.EnemyManager;
 import entities.Player;
 import entities.PlayerCharacter;
 import levels.LevelManager;
-import main.Game;
+import main.FlappyGame;
 import objects.ObjectManager;
 import ui.GameCompletedOverlay;
 import ui.GameOverOverlay;
 import ui.LevelCompletedOverlay;
 import ui.PauseOverlay;
-import utilz.LoadSave;
+import utils.LoadSave;
 import effects.DialogueEffect;
 import effects.Rain;
 
-import static utilz.Constants.Environment.*;
-import static utilz.Constants.Dialogue.*;
+import static utils.Constants.Environment.*;
+import static utils.Constants.Dialogue.*;
 
 public class Playing extends State implements Statemethods {
 
@@ -41,8 +41,8 @@ public class Playing extends State implements Statemethods {
     private boolean paused = false;
 
     private int xLvlOffset;
-    private int leftBorder = (int) (0.25 * Game.GAME_WIDTH);
-    private int rightBorder = (int) (0.75 * Game.GAME_WIDTH);
+    private int leftBorder = (int) (0.25 * FlappyGame.GAME_WIDTH);
+    private int rightBorder = (int) (0.75 * FlappyGame.GAME_WIDTH);
     private int maxLvlOffsetX;
 
     private BufferedImage backgroundImg, bigCloud, smallCloud, shipImgs[];
@@ -58,7 +58,7 @@ public class Playing extends State implements Statemethods {
     private boolean playerDying;
     private boolean drawRain;
 
-    // Ship will be decided to drawn here. It's just a cool addition to the game
+    // Ship will be decided to drawn here. It's just a cool addition to the flappyGame
     // for the first level. Hinting on that the player arrived with the boat.
 
     // If you would like to have it on more levels, add a value for objects when
@@ -70,10 +70,10 @@ public class Playing extends State implements Statemethods {
 
     private boolean drawShip = true;
     private int shipAni, shipTick, shipDir = 1;
-    private float shipHeightDelta, shipHeightChange = 0.05f * Game.SCALE;
+    private float shipHeightDelta, shipHeightChange = 0.05f * FlappyGame.SCALE;
 
-    public Playing(Game game) {
-        super(game);
+    public Playing(FlappyGame flappyGame) {
+        super(flappyGame);
         initClasses();
 
         backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.PLAYING_BG_IMG);
@@ -81,7 +81,7 @@ public class Playing extends State implements Statemethods {
         smallCloud = LoadSave.GetSpriteAtlas(LoadSave.SMALL_CLOUDS);
         smallCloudsPos = new int[8];
         for (int i = 0; i < smallCloudsPos.length; i++)
-            smallCloudsPos[i] = (int) (90 * Game.SCALE) + rnd.nextInt((int) (100 * Game.SCALE));
+            smallCloudsPos[i] = (int) (90 * FlappyGame.SCALE) + rnd.nextInt((int) (100 * FlappyGame.SCALE));
 
         shipImgs = new BufferedImage[4];
         BufferedImage temp = LoadSave.GetSpriteAtlas(LoadSave.SHIP);
@@ -141,7 +141,7 @@ public class Playing extends State implements Statemethods {
     }
 
     private void initClasses() {
-        levelManager = new LevelManager(game);
+        levelManager = new LevelManager(flappyGame);
         enemyManager = new EnemyManager(this);
         objectManager = new ObjectManager(this);
 
@@ -197,11 +197,11 @@ public class Playing extends State implements Statemethods {
         }
 
         shipHeightDelta += shipHeightChange * shipDir;
-        shipHeightDelta = Math.max(Math.min(10 * Game.SCALE, shipHeightDelta), 0);
+        shipHeightDelta = Math.max(Math.min(10 * FlappyGame.SCALE, shipHeightDelta), 0);
 
         if (shipHeightDelta == 0)
             shipDir = 1;
-        else if (shipHeightDelta == 10 * Game.SCALE)
+        else if (shipHeightDelta == 10 * FlappyGame.SCALE)
             shipDir = -1;
 
     }
@@ -224,11 +224,11 @@ public class Playing extends State implements Statemethods {
 
     public void addDialogue(int x, int y, int type) {
         // Not adding a new one, we are recycling. #ThinkGreen lol
-        dialogEffects.add(new DialogueEffect(x, y - (int) (Game.SCALE * 15), type));
+        dialogEffects.add(new DialogueEffect(x, y - (int) (FlappyGame.SCALE * 15), type));
         for (DialogueEffect de : dialogEffects)
             if (!de.isActive())
                 if (de.getType() == type) {
-                    de.reset(x, -(int) (Game.SCALE * 15));
+                    de.reset(x, -(int) (FlappyGame.SCALE * 15));
                     return;
                 }
     }
@@ -247,14 +247,14 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(backgroundImg, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
+        g.drawImage(backgroundImg, 0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
 
         drawClouds(g);
         if (drawRain)
             rain.draw(g, xLvlOffset);
 
         if (drawShip)
-            g.drawImage(shipImgs[shipAni], (int) (100 * Game.SCALE) - xLvlOffset, (int) ((288 * Game.SCALE) + shipHeightDelta), (int) (78 * Game.SCALE), (int) (72 * Game.SCALE), null);
+            g.drawImage(shipImgs[shipAni], (int) (100 * FlappyGame.SCALE) - xLvlOffset, (int) ((288 * FlappyGame.SCALE) + shipHeightDelta), (int) (78 * FlappyGame.SCALE), (int) (72 * FlappyGame.SCALE), null);
 
         levelManager.draw(g, xLvlOffset);
         objectManager.draw(g, xLvlOffset);
@@ -265,7 +265,7 @@ public class Playing extends State implements Statemethods {
 
         if (paused) {
             g.setColor(new Color(0, 0, 0, 150));
-            g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
+            g.fillRect(0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT);
             pauseOverlay.draw(g);
         } else if (gameOver)
             gameOverOverlay.draw(g);
@@ -278,7 +278,7 @@ public class Playing extends State implements Statemethods {
 
     private void drawClouds(Graphics g) {
         for (int i = 0; i < 4; i++)
-            g.drawImage(bigCloud, i * BIG_CLOUD_WIDTH - (int) (xLvlOffset * 0.3), (int) (204 * Game.SCALE), BIG_CLOUD_WIDTH, BIG_CLOUD_HEIGHT, null);
+            g.drawImage(bigCloud, i * BIG_CLOUD_WIDTH - (int) (xLvlOffset * 0.3), (int) (204 * FlappyGame.SCALE), BIG_CLOUD_WIDTH, BIG_CLOUD_HEIGHT, null);
 
         for (int i = 0; i < smallCloudsPos.length; i++)
             g.drawImage(smallCloud, SMALL_CLOUD_WIDTH * 4 * i - (int) (xLvlOffset * 0.7), smallCloudsPos[i], SMALL_CLOUD_WIDTH, SMALL_CLOUD_HEIGHT, null);
@@ -422,7 +422,7 @@ public class Playing extends State implements Statemethods {
     }
 
     public void setLevelCompleted(boolean levelCompleted) {
-        game.getAudioPlayer().lvlCompleted();
+        flappyGame.getAudioPlayer().lvlCompleted();
         if (levelManager.getLevelIndex() + 1 >= levelManager.getAmountOfLevels()) {
             // No more levels
             gameCompleted = true;

@@ -7,9 +7,9 @@ import java.awt.image.BufferedImage;
 
 import gamestates.Gamestate;
 import gamestates.Playing;
-import main.Game;
-import utilz.LoadSave;
-import static utilz.Constants.UI.URMButtons.*;
+import main.FlappyGame;
+import utils.LoadSave;
+import static utils.Constants.UI.URMButtons.*;
 
 public class LevelCompletedOverlay {
 
@@ -25,24 +25,24 @@ public class LevelCompletedOverlay {
 	}
 
 	private void initButtons() {
-		int menuX = (int) (330 * Game.SCALE);
-		int nextX = (int) (445 * Game.SCALE);
-		int y = (int) (195 * Game.SCALE);
+		int menuX = (int) (330 * FlappyGame.SCALE);
+		int nextX = (int) (445 * FlappyGame.SCALE);
+		int y = (int) (195 * FlappyGame.SCALE);
 		next = new UrmButton(nextX, y, URM_SIZE, URM_SIZE, 0);
 		menu = new UrmButton(menuX, y, URM_SIZE, URM_SIZE, 2);
 	}
 
 	private void initImg() {
 		img = LoadSave.GetSpriteAtlas(LoadSave.COMPLETED_IMG);
-		bgW = (int) (img.getWidth() * Game.SCALE);
-		bgH = (int) (img.getHeight() * Game.SCALE);
-		bgX = Game.GAME_WIDTH / 2 - bgW / 2;
-		bgY = (int) (75 * Game.SCALE);
+		bgW = (int) (img.getWidth() * FlappyGame.SCALE);
+		bgH = (int) (img.getHeight() * FlappyGame.SCALE);
+		bgX = FlappyGame.GAME_WIDTH / 2 - bgW / 2;
+		bgY = (int) (75 * FlappyGame.SCALE);
 	}
 
 	public void draw(Graphics g) {
 		g.setColor(new Color(0, 0, 0, 200));
-		g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
+		g.fillRect(0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT);
 
 		g.drawImage(img, bgX, bgY, bgW, bgH, null);
 		next.draw(g);

@@ -6,8 +6,8 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import main.Game;
-import utilz.LoadSave;
+import main.FlappyGame;
+import utils.LoadSave;
 
 public class Credits extends State implements Statemethods {
     private BufferedImage backgroundImg, creditsImg;
@@ -16,23 +16,23 @@ public class Credits extends State implements Statemethods {
 
     private ArrayList<ShowEntity> entitiesList;
 
-    public Credits(Game game) {
-        super(game);
+    public Credits(FlappyGame flappyGame) {
+        super(flappyGame);
         backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.MENU_BACKGROUND_IMG);
         creditsImg = LoadSave.GetSpriteAtlas(LoadSave.CREDITS);
-        bgW = (int) (creditsImg.getWidth() * Game.SCALE);
-        bgH = (int) (creditsImg.getHeight() * Game.SCALE);
-        bgX = Game.GAME_WIDTH / 2 - bgW / 2;
-        bgY = Game.GAME_HEIGHT;
+        bgW = (int) (creditsImg.getWidth() * FlappyGame.SCALE);
+        bgH = (int) (creditsImg.getHeight() * FlappyGame.SCALE);
+        bgX = FlappyGame.GAME_WIDTH / 2 - bgW / 2;
+        bgY = FlappyGame.GAME_HEIGHT;
         loadEntities();
     }
 
     private void loadEntities() {
         entitiesList = new ArrayList<>();
-        entitiesList.add(new ShowEntity(getIdleAni(LoadSave.GetSpriteAtlas(LoadSave.PLAYER_PIRATE), 5, 64, 40), (int) (Game.GAME_WIDTH * 0.05), (int) (Game.GAME_HEIGHT * 0.8)));
-        entitiesList.add(new ShowEntity(getIdleAni(LoadSave.GetSpriteAtlas(LoadSave.CRABBY_SPRITE), 9, 72, 32), (int) (Game.GAME_WIDTH * 0.15), (int) (Game.GAME_HEIGHT * 0.75)));
-        entitiesList.add(new ShowEntity(getIdleAni(LoadSave.GetSpriteAtlas(LoadSave.PINKSTAR_ATLAS), 8, 34, 30), (int) (Game.GAME_WIDTH * 0.7), (int) (Game.GAME_HEIGHT * 0.75)));
-        entitiesList.add(new ShowEntity(getIdleAni(LoadSave.GetSpriteAtlas(LoadSave.SHARK_ATLAS), 8, 34, 30), (int) (Game.GAME_WIDTH * 0.8), (int) (Game.GAME_HEIGHT * 0.8)));
+        entitiesList.add(new ShowEntity(getIdleAni(LoadSave.GetSpriteAtlas(LoadSave.PLAYER_PIRATE), 5, 64, 40), (int) (FlappyGame.GAME_WIDTH * 0.05), (int) (FlappyGame.GAME_HEIGHT * 0.8)));
+        entitiesList.add(new ShowEntity(getIdleAni(LoadSave.GetSpriteAtlas(LoadSave.CRABBY_SPRITE), 9, 72, 32), (int) (FlappyGame.GAME_WIDTH * 0.15), (int) (FlappyGame.GAME_HEIGHT * 0.75)));
+        entitiesList.add(new ShowEntity(getIdleAni(LoadSave.GetSpriteAtlas(LoadSave.PINKSTAR_ATLAS), 8, 34, 30), (int) (FlappyGame.GAME_WIDTH * 0.7), (int) (FlappyGame.GAME_HEIGHT * 0.75)));
+        entitiesList.add(new ShowEntity(getIdleAni(LoadSave.GetSpriteAtlas(LoadSave.SHARK_ATLAS), 8, 34, 30), (int) (FlappyGame.GAME_WIDTH * 0.8), (int) (FlappyGame.GAME_HEIGHT * 0.8)));
     }
 
     private BufferedImage[] getIdleAni(BufferedImage atlas, int spritesAmount, int width, int height) {
@@ -51,7 +51,7 @@ public class Credits extends State implements Statemethods {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(backgroundImg, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
+        g.drawImage(backgroundImg, 0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
         g.drawImage(creditsImg, bgX, (int) (bgY + bgYFloat), bgW, bgH, null);
 
         for (ShowEntity se : entitiesList)

@@ -1,7 +1,7 @@
 package effects;
 
-import static utilz.Constants.ANI_SPEED;
-import static utilz.Constants.Dialogue.*;
+import static utils.Constants.ANI_SPEED;
+import static utils.Constants.Dialogue.*;
 
 public class DialogueEffect {
 

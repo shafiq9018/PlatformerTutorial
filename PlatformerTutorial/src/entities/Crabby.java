@@ -1,8 +1,8 @@
 package entities;
 
-import static utilz.Constants.EnemyConstants.*;
-import static utilz.HelpMethods.IsFloor;
-import static utilz.Constants.Dialogue.*;
+import static utils.Constants.EnemyConstants.*;
+import static utils.HelpMethods.IsFloor;
+import static utils.Constants.Dialogue.*;
 
 import gamestates.Playing;
 

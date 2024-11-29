@@ -9,12 +9,12 @@ import entities.Enemy;
 import entities.Player;
 import gamestates.Playing;
 import levels.Level;
-import main.Game;
-import utilz.LoadSave;
-import static utilz.Constants.ObjectConstants.*;
-import static utilz.HelpMethods.CanCannonSeePlayer;
-import static utilz.HelpMethods.IsProjectileHittingLevel;
-import static utilz.Constants.Projectiles.*;
+import main.FlappyGame;
+import utils.LoadSave;
+import static utils.Constants.ObjectConstants.*;
+import static utils.HelpMethods.CanCannonSeePlayer;
+import static utils.HelpMethods.IsProjectileHittingLevel;
+import static utils.Constants.Projectiles.*;
 
 public class ObjectManager {
 
@@ -158,7 +158,7 @@ public class ObjectManager {
 
 	private boolean isPlayerInRange(Cannon c, Player player) {
 		int absValue = (int) Math.abs(player.getHitbox().x - c.getHitbox().x);
-		return absValue <= Game.TILES_SIZE * 5;
+		return absValue <= FlappyGame.TILES_SIZE * 5;
 	}
 
 	private boolean isPlayerInfrontOfCannon(Cannon c, Player player) {
@@ -205,7 +205,7 @@ public class ObjectManager {
 
 	private void drawGrass(Graphics g, int xLvlOffset) {
 		for (Grass grass : currentLevel.getGrass())
-			g.drawImage(grassImgs[grass.getType()], grass.getX() - xLvlOffset, grass.getY(), (int) (32 * Game.SCALE), (int) (32 * Game.SCALE), null);
+			g.drawImage(grassImgs[grass.getType()], grass.getX() - xLvlOffset, grass.getY(), (int) (32 * FlappyGame.SCALE), (int) (32 * FlappyGame.SCALE), null);
 	}
 
 	public void drawBackgroundTrees(Graphics g, int xLvlOffset) {

@@ -7,8 +7,8 @@ import java.awt.image.BufferedImage;
 
 import gamestates.Gamestate;
 import gamestates.Playing;
-import main.Game;
-import utilz.LoadSave;
+import main.FlappyGame;
+import utils.LoadSave;
 
 public class GameCompletedOverlay {
 	private Playing playing;
@@ -23,22 +23,22 @@ public class GameCompletedOverlay {
 	}
 
 	private void createButtons() {
-		quit = new MenuButton(Game.GAME_WIDTH / 2, (int) (270 * Game.SCALE), 2, Gamestate.MENU);
-		credit = new MenuButton(Game.GAME_WIDTH / 2, (int) (200 * Game.SCALE), 3, Gamestate.CREDITS);
+		quit = new MenuButton(FlappyGame.GAME_WIDTH / 2, (int) (270 * FlappyGame.SCALE), 2, Gamestate.MENU);
+		credit = new MenuButton(FlappyGame.GAME_WIDTH / 2, (int) (200 * FlappyGame.SCALE), 3, Gamestate.CREDITS);
 	}
 
 	private void createImg() {
 		img = LoadSave.GetSpriteAtlas(LoadSave.GAME_COMPLETED);
-		imgW = (int) (img.getWidth() * Game.SCALE);
-		imgH = (int) (img.getHeight() * Game.SCALE);
-		imgX = Game.GAME_WIDTH / 2 - imgW / 2;
-		imgY = (int) (100 * Game.SCALE);
+		imgW = (int) (img.getWidth() * FlappyGame.SCALE);
+		imgH = (int) (img.getHeight() * FlappyGame.SCALE);
+		imgX = FlappyGame.GAME_WIDTH / 2 - imgW / 2;
+		imgY = (int) (100 * FlappyGame.SCALE);
 
 	}
 
 	public void draw(Graphics g) {
 		g.setColor(new Color(0, 0, 0, 200));
-		g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
+		g.fillRect(0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT);
 
 		g.drawImage(img, imgX, imgY, imgW, imgH, null);
 

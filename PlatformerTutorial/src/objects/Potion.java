@@ -1,6 +1,6 @@
 package objects;
 
-import main.Game;
+import main.FlappyGame;
 
 public class Potion extends GameObject {
 
@@ -13,10 +13,10 @@ public class Potion extends GameObject {
 
 		initHitbox(7, 14);
 
-		xDrawOffset = (int) (3 * Game.SCALE);
-		yDrawOffset = (int) (2 * Game.SCALE);
+		xDrawOffset = (int) (3 * FlappyGame.SCALE);
+		yDrawOffset = (int) (2 * FlappyGame.SCALE);
 
-		maxHoverOffset = (int) (10 * Game.SCALE);
+		maxHoverOffset = (int) (10 * FlappyGame.SCALE);
 	}
 
 	public void update() {
@@ -25,7 +25,7 @@ public class Potion extends GameObject {
 	}
 
 	private void updateHover() {
-		hoverOffset += (0.075f * Game.SCALE * hoverDir);
+		hoverOffset += (0.075f * FlappyGame.SCALE * hoverDir);
 
 		if (hoverOffset >= maxHoverOffset)
 			hoverDir = -1;
