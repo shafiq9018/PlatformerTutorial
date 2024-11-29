@@ -125,7 +125,6 @@ public class Constants {
 				return (int) (int) (92 * FlappyGame.SCALE);
 			case TREE_TWO, TREE_THREE:
 				return (int) (54 * FlappyGame.SCALE);
-
 			}
 			return 0;
 		}
@@ -183,9 +182,7 @@ public class Constants {
 			case DEAD:
 				return 5;
 			}
-
 			return 0;
-
 		}
 
 		public static int GetMaxHealth(int enemy_type) {
