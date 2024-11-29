@@ -26,7 +26,6 @@ public class LoadSave {
     /// The videos above may contain old methods and classes. Please be careful.
     /// - Shafiq
     ///
-
     public static final String PLAYER_ATLAS = "eagle_Linear_Sheet_Fixed.png";
     public static final String PLAYER_PIRATE = "player_sprites.png";
     public static final String PLAYER_ORC = "player_orc.png";
@@ -75,39 +74,19 @@ public class LoadSave {
         return animations;
     }
 
-    // Will add ability to choose different birds.
-    public static BufferedImageNew[][] loadBirdAnimations(PlayerCharacter pc) {
-        BufferedImage img = LoadSave.GetSpriteAtlas(pc.playerAtlas);
-        BufferedImage[][] animations = new BufferedImage[pc.rowA][pc.colA];
-        for (int j = 0; j < animations.length; j++)
-            for (int i = 0; i < animations[j].length; i++)
-                animations[j][i] = img.getSubimage(i * pc.spriteW, j * pc.spriteH, pc.spriteW, pc.spriteH);
-        return animations;
-    }
-
-    private void loadBirdAnimations() {
-        BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);
-        //               BufferedImage[i Row][j columns]
-        animations = new BufferedImage[4][11];
-        // System.out.println("BufferedImage[] []" + animations.length);
-        // System.out.println("BufferedImage[] []" + animations[0].length);
-        for (int j = 0; j < animations.length; j++)
-            for (int i = 0; i < animations[j].length; i++) {
-                // Original player
-                // animations[j][i] = img.getSubimage(i * 64, j * 40, 64, 40);
-                // Flappy Bird
-                // animations[j][i] = img.getSubimage(i * 158, (j * 0) + 2, 158, 122);
-                // Crow Flappy Bird
-
-                animations[j][i] = img.getSubimage(i * 180 + 30, 0, 200, 185);
-                //  System.out.println("animations " + animations[j].length);
-
-            }
-        statusBarImg = LoadSave.GetSpriteAtlas(LoadSave.STATUS_BAR);
-    }
+    // Will add ability to choose different birds coming up next.
+    //    public static BufferedImageNew[][] loadBirdAnimations(PlayerCharacter pc) {
+    //        BufferedImage img = LoadSave.GetSpriteAtlas(pc.playerAtlas);
+    //        BufferedImage[][] animations = new BufferedImage[pc.rowA][pc.colA];
+    //        for (int j = 0; j < animations.length; j++)
+    //            for (int i = 0; i < animations[j].length; i++)
+    //                animations[j][i] = img.getSubimage(i * pc.spriteW, j * pc.spriteH, pc.spriteW, pc.spriteH);
+    //        return animations;
+    //    }
 
 
     public static BufferedImage GetSpriteAtlas(String fileName) {
+        System.out.println("////////////////// fileName: " + fileName);
         BufferedImage img = null;
         InputStream is = LoadSave.class.getResourceAsStream("/" + fileName);
         try {
@@ -127,6 +106,7 @@ public class LoadSave {
 
     public static BufferedImage[] GetAllLevels() {
         URL url = LoadSave.class.getResource("/lvls");
+        System.out.println("url: " + url);
         File file = null;
         try {
             file = new File(url.toURI());

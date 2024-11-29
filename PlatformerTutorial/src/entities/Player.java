@@ -81,13 +81,37 @@ public class Player extends Entity {
         // animations = LoadSave.loadAnimations(playerCharacter);
 
         // Load birds instead of other characters.
-        animations = LoadSave.loadBirdAnimations(playerCharacter);
+
+        loadBirdAnimations();
+
+
+        // animations = LoadSave.loadBirdAnimations(playerCharacter);
 
         statusBarImg = LoadSave.GetSpriteAtlas(LoadSave.STATUS_BAR);
 
         initHitbox(playerCharacter.hitboxW, playerCharacter.hitboxH);
 
         initAttackBox();
+    }
+
+    private void loadBirdAnimations() {
+        BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);
+        //               BufferedImage[i Row][j columns]
+        animations = new BufferedImage[4][11];
+        // System.out.println("BufferedImage[] []" + animations.length);
+        // System.out.println("BufferedImage[] []" + animations[0].length);
+        for (int j = 0; j < animations.length; j++)
+            for (int i = 0; i < animations[j].length; i++) {
+                // Original player
+                // animations[j][i] = img.getSubimage(i * 64, j * 40, 64, 40);
+                // Flappy Bird
+                // animations[j][i] = img.getSubimage(i * 158, (j * 0) + 2, 158, 122);
+                // Crow Flappy Bird
+
+                animations[j][i] = img.getSubimage(i * 180 + 30, 0, 200, 185);
+                //  System.out.println("animations " + animations[j].length);
+
+            }
     }
 
     public void setSpawn(Point spawn) {
