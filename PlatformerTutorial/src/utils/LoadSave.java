@@ -12,7 +12,22 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 
 public class LoadSave {
+    ///***********************************************************************************
+    ///                          IMPORTANT NOTES
+    ///                          - by Shafiq
+    /// - This game uses a pixel level map to load graphics for the background
+    /// - Explanation for collisions.
+    ///   https://youtu.be/PrAmaeQF4f0?list=PL4rzdwizLaxYmltJQRjq18a9gsSyEQQ-0&t=70
+    ///
+    /// - Moving the background images
+    ///   https://youtu.be/JmcBRVz2Voo?list=PL4rzdwizLaxYmltJQRjq18a9gsSyEQQ-0&t=913
+    ///
+    /// UPDATE This FlappyBird has been placed on the newest EP29 Char Selection
+    /// The videos above may contain old methods and classes. Please be careful.
+    /// - Shafiq
+    ///
 
+    public static final String PLAYER_ATLAS = "eagle_Linear_Sheet_Fixed.png";
     public static final String PLAYER_PIRATE = "player_sprites.png";
     public static final String PLAYER_ORC = "player_orc.png";
     public static final String PLAYER_SOLDIER = "player_soldier.png";
@@ -58,6 +73,37 @@ public class LoadSave {
             for (int i = 0; i < animations[j].length; i++)
                 animations[j][i] = img.getSubimage(i * pc.spriteW, j * pc.spriteH, pc.spriteW, pc.spriteH);
         return animations;
+    }
+
+    // Will add ability to choose different birds.
+    public static BufferedImageNew[][] loadBirdAnimations(PlayerCharacter pc) {
+        BufferedImage img = LoadSave.GetSpriteAtlas(pc.playerAtlas);
+        BufferedImage[][] animations = new BufferedImage[pc.rowA][pc.colA];
+        for (int j = 0; j < animations.length; j++)
+            for (int i = 0; i < animations[j].length; i++)
+                animations[j][i] = img.getSubimage(i * pc.spriteW, j * pc.spriteH, pc.spriteW, pc.spriteH);
+        return animations;
+    }
+
+    private void loadBirdAnimations() {
+        BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);
+        //               BufferedImage[i Row][j columns]
+        animations = new BufferedImage[4][11];
+        // System.out.println("BufferedImage[] []" + animations.length);
+        // System.out.println("BufferedImage[] []" + animations[0].length);
+        for (int j = 0; j < animations.length; j++)
+            for (int i = 0; i < animations[j].length; i++) {
+                // Original player
+                // animations[j][i] = img.getSubimage(i * 64, j * 40, 64, 40);
+                // Flappy Bird
+                // animations[j][i] = img.getSubimage(i * 158, (j * 0) + 2, 158, 122);
+                // Crow Flappy Bird
+
+                animations[j][i] = img.getSubimage(i * 180 + 30, 0, 200, 185);
+                //  System.out.println("animations " + animations[j].length);
+
+            }
+        statusBarImg = LoadSave.GetSpriteAtlas(LoadSave.STATUS_BAR);
     }
 
 

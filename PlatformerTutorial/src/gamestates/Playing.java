@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.sql.SQLOutput;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.ArrayList;
@@ -69,7 +70,8 @@ public class Playing extends State implements Statemethods {
     // you want
     // it.
 
-    private boolean drawShip = true;
+    // This works, but we don't need it for current application.
+    private boolean drawShip = false;
     private int shipAni, shipTick, shipDir = 1;
     private float shipHeightDelta, shipHeightChange = 0.05f * FlappyGame.SCALE;
 
@@ -89,7 +91,7 @@ public class Playing extends State implements Statemethods {
         for (int i = 0; i < shipImgs.length; i++)
             shipImgs[i] = temp.getSubimage(i * 78, 0, 78, 72);
 
-        loadDialogue();
+       // loadDialogue();
         calcLvlOffset();
         loadStartLevel();
         setDrawRainBoolean();
@@ -174,7 +176,7 @@ public class Playing extends State implements Statemethods {
         else if (playerDying)
             player.update();
         else {
-            updateDialogue();
+            // updateDialogue();
             if (drawRain)
                 rain.update(xLvlOffset);
             levelManager.update();
@@ -206,21 +208,21 @@ public class Playing extends State implements Statemethods {
 
     }
 
-    private void updateDialogue() {
-        for (DialogueEffect de : dialogEffects)
-            if (de.isActive())
-                de.update();
-    }
-
-    private void drawDialogue(Graphics g, int xLvlOffset) {
-        for (DialogueEffect de : dialogEffects)
-            if (de.isActive()) {
-                if (de.getType() == QUESTION)
-                    g.drawImage(questionImgs[de.getAniIndex()], de.getX() - xLvlOffset, de.getY(), DIALOGUE_WIDTH, DIALOGUE_HEIGHT, null);
-                else
-                    g.drawImage(exclamationImgs[de.getAniIndex()], de.getX() - xLvlOffset, de.getY(), DIALOGUE_WIDTH, DIALOGUE_HEIGHT, null);
-            }
-    }
+//    private void updateDialogue() {
+//        for (DialogueEffect de : dialogEffects)
+//            if (de.isActive())
+//                de.update();
+//    }
+//
+//    private void drawDialogue(Graphics g, int xLvlOffset) {
+//        for (DialogueEffect de : dialogEffects)
+//            if (de.isActive()) {
+//                if (de.getType() == QUESTION)
+//                    g.drawImage(questionImgs[de.getAniIndex()], de.getX() - xLvlOffset, de.getY(), DIALOGUE_WIDTH, DIALOGUE_HEIGHT, null);
+//                else
+//                    g.drawImage(exclamationImgs[de.getAniIndex()], de.getX() - xLvlOffset, de.getY(), DIALOGUE_WIDTH, DIALOGUE_HEIGHT, null);
+//            }
+//    }
 
     public void addDialogue(int x, int y, int type) {
         // Not adding a new one, we are recycling. #ThinkGreen lol
@@ -237,8 +239,9 @@ public class Playing extends State implements Statemethods {
         int playerX = (int) player.getHitbox().x;
         int diff = playerX - xLvlOffset;
 
-        if (diff > rightBorder)
+        if (diff > rightBorder) {
             xLvlOffset += diff - rightBorder;
+        }
         else if (diff < leftBorder)
             xLvlOffset += diff - leftBorder;
 
@@ -247,9 +250,13 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void draw(Graphics g) {
+
         g.drawImage(backgroundImg, 0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
 
         drawClouds(g);
+
+        setDrawRainBoolean(); // Make it rain 25% of the time.
+
         if (drawRain)
             rain.draw(g, xLvlOffset);
 
@@ -261,7 +268,7 @@ public class Playing extends State implements Statemethods {
         enemyManager.draw(g, xLvlOffset);
         player.render(g, xLvlOffset);
         objectManager.drawBackgroundTrees(g, xLvlOffset);
-        drawDialogue(g, xLvlOffset);
+       // drawDialogue(g, xLvlOffset);
 
         if (paused) {
             g.setColor(new Color(0, 0, 0, 150));

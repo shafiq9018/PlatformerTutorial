@@ -72,9 +72,11 @@ public class Level {
 		else
 			lvlData[y][x] = redValue;
 		switch (redValue) {
-		case 0, 1, 2, 3, 30, 31, 33, 34, 35, 36, 37, 38, 39 -> 
-		grass.add(new Grass((int) (x * FlappyGame.TILES_SIZE), (int) (y * FlappyGame.TILES_SIZE) - FlappyGame.TILES_SIZE, getRndGrassType(x)));
-		}
+            case 0, 1, 2, 3, 30, 31, 33, 34, 35, 36, 37, 38, 39 -> {
+                // grass.add(new Grass((int) (x * FlappyGame.TILES_SIZE), (int) (y * FlappyGame.TILES_SIZE) - FlappyGame.TILES_SIZE, getRndGrassType(x)));
+
+            }
+        }
 	}
 
 	private int getRndGrassType(int xPos) {

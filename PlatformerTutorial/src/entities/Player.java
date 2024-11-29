@@ -5,9 +5,7 @@ import static utils.HelpMethods.*;
 import static utils.Constants.*;
 import static utils.Constants.Directions.*;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
@@ -65,6 +63,10 @@ public class Player extends Entity {
     private int powerGrowTick;
 
     private final PlayerCharacter playerCharacter;
+    private  int birdScore = 0;
+    private  boolean birdEntered = false;
+    private  boolean birdExited = true;
+
 
     public Player(PlayerCharacter playerCharacter, Playing playing) {
         super(0, 0, (int) (playerCharacter.spriteW * FlappyGame.SCALE), (int) (playerCharacter.spriteH * FlappyGame.SCALE));
@@ -74,9 +76,17 @@ public class Player extends Entity {
         this.maxHealth = 100;
         this.currentHealth = maxHealth;
         this.walkSpeed = FlappyGame.SCALE * 1.0f;
-        animations = LoadSave.loadAnimations(playerCharacter);
+
+        // Load other player characters
+        // animations = LoadSave.loadAnimations(playerCharacter);
+
+        // Load birds instead of other characters.
+        animations = LoadSave.loadBirdAnimations(playerCharacter);
+
         statusBarImg = LoadSave.GetSpriteAtlas(LoadSave.STATUS_BAR);
+
         initHitbox(playerCharacter.hitboxW, playerCharacter.hitboxH);
+
         initAttackBox();
     }
 
@@ -87,6 +97,30 @@ public class Player extends Entity {
         this.y = 33;
         hitbox.x = x;
         hitbox.y = y;
+    }
+
+    // The logic in this method works as a toggle switch to keep score
+    // It avoids duplicating the score if the bird spends too much inside the fly zone.
+    public void updateBirdScore(float x, float y, int[][] lvlData) {
+        int xIndex = (int) (x / FlappyGame.TILES_SIZE);
+        int yIndex = (int) (y / FlappyGame.TILES_SIZE);
+        int currentValue = lvlData[yIndex][xIndex];
+        if (currentValue == 23) {
+            // Bird is on the scoring tile
+            if (!birdEntered) {
+                birdEntered = true;
+                birdExited = false;
+                System.out.println("Bird entered the scoring zone");
+            }
+        } else {
+            // Bird is not on the scoring tile
+            if (birdEntered && !birdExited) {
+                birdExited = true;
+                birdEntered = false;
+                birdScore++;
+                System.out.println("Bird exited the scoring zone. Current score: " + birdScore);
+            }
+        }
     }
 
     private void initAttackBox() {
@@ -227,8 +261,16 @@ public class Player extends Entity {
     public void render(Graphics g, int lvlOffset) {
         g.drawImage(animations[playerCharacter.getRowIndex(state)][aniIndex], (int) (hitbox.x - playerCharacter.xDrawOffset) - lvlOffset + flipX, (int) (hitbox.y - playerCharacter.yDrawOffset + (int) (pushDrawOffset)), width * flipW, height, null);
         drawHitbox(g, lvlOffset);
-//		drawAttackBox(g, lvlOffset);
+        // drawAttackBox(g, lvlOffset); This is for if we need to set an attack area for the bird. Not used.
         drawUI(g);
+        updateScore(birdScore, g);
+
+    }
+
+    public void updateScore(int score,Graphics g ) {
+        g.setColor(Color.white);
+        g.setFont(new Font("Arial", Font.BOLD, 30));
+        g.drawString("Score: " + score, 50, 50);
     }
 
     private void drawUI(Graphics g) {
@@ -376,9 +418,12 @@ public class Player extends Entity {
         airSpeed = 0;
     }
 
+    // Scorekeeper is updated here.
     private void updateXPos(float xSpeed) {
-        if (CanMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData))
+        if (CanMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
+            updateBirdScore(hitbox.x, hitbox.y, lvlData);
             hitbox.x += xSpeed;
+        }
         else {
             hitbox.x = GetEntityXPosNextToWall(hitbox, xSpeed);
             if (powerAttackActive) {
