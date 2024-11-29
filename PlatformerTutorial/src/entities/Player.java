@@ -93,38 +93,38 @@ public class Player extends Entity {
 			return;
 		}
 
-		updateAttackBox();
+//		updateAttackBox();
 
 		updatePos();
-		if (moving) {
-			checkPotionTouched();
-			checkSpikesTouched();
-			tileY = (int) (hitbox.y / Game.TILES_SIZE);
-		}
-		if (attacking)
-			checkAttack();
-
+//		if (moving) {
+//			checkPotionTouched();
+//			checkSpikesTouched();
+//			tileY = (int) (hitbox.y / Game.TILES_SIZE);
+//		}
+//		if (attacking)
+//			checkAttack();
+//
 		updateAnimationTick();
 		setAnimation();
 	}
 
-	private void checkSpikesTouched() {
-		playing.checkSpikesTouched(this);
+//	private void checkSpikesTouched() {
+//		playing.checkSpikesTouched(this);
+//
+//	}
 
-	}
-
-	private void checkPotionTouched() {
-		playing.checkPotionTouched(hitbox);
-	}
-
-	private void checkAttack() {
-		if (attackChecked || aniIndex != 1)
-			return;
-		attackChecked = true;
-		playing.checkEnemyHit(attackBox);
-		playing.checkObjectHit(attackBox);
-		playing.getGame().getAudioPlayer().playAttackSound();
-	}
+//	private void checkPotionTouched() {
+//		playing.checkPotionTouched(hitbox);
+//	}
+//
+//	private void checkAttack() {
+//		if (attackChecked || aniIndex != 1)
+//			return;
+//		attackChecked = true;
+//		playing.checkEnemyHit(attackBox);
+//		playing.checkObjectHit(attackBox);
+//		playing.getGame().getAudioPlayer().playAttackSound();
+//	}
 
 	private void updateAttackBox() {
 		if (right)
