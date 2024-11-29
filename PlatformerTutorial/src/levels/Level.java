@@ -38,6 +38,7 @@ public class Level {
 	private int maxTilesOffset;
 	private int maxLvlOffsetX;
 	private Point playerSpawn;
+	private int mobtype = 0;
 
 	public Level(BufferedImage img) {
 		this.img = img;
@@ -81,12 +82,15 @@ public class Level {
 	}
 
 	private void loadEntities(int greenValue, int x, int y) {
+		mobtype ++;
+		greenValue = mobtype;
+		if (greenValue > 2) mobtype =0;
 		switch (greenValue) {
 //		case CRABBY -> crabs.add(new Crabby(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE));
 //		case PINKSTAR -> pinkstars.add(new Pinkstar(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE));
 //		case SHARK -> sharks.add(new Shark(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE));
-		case CRABBY -> crabs.add(new Crabby(25,25 ));
-		case PINKSTAR -> pinkstars.add(new Pinkstar(25 * 3,25 ));
+		case CRABBY -> crabs.add(new Crabby(250,25 ));
+		case PINKSTAR -> pinkstars.add(new Pinkstar(325 * 3,25 ));
 		case SHARK -> sharks.add(new Shark(25 * 5,25));		// case 100 -> playerSpawn = new Point(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE);
 		// Bird spawn point left of screen in the middle appx.
 		case 100 -> playerSpawn = new Point(5, 5);
@@ -95,11 +99,11 @@ public class Level {
 
 	private void loadObjects(int blueValue, int x, int y) {
 		switch (blueValue) {
-		case RED_POTION, BLUE_POTION -> potions.add(new Potion(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE, blueValue));
-		case BOX, BARREL -> containers.add(new GameContainer(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE, blueValue));
-		case SPIKE -> spikes.add(new Spike(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE, SPIKE));
-		case CANNON_LEFT, CANNON_RIGHT -> cannons.add(new Cannon(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE, blueValue));
-		case TREE_ONE, TREE_TWO, TREE_THREE -> trees.add(new BackgroundTree(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE, blueValue));
+//		case RED_POTION, BLUE_POTION -> potions.add(new Potion(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE, blueValue));
+//		case BOX, BARREL -> containers.add(new GameContainer(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE, blueValue));
+//		case SPIKE -> spikes.add(new Spike(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE, SPIKE));
+//		case CANNON_LEFT, CANNON_RIGHT -> cannons.add(new Cannon(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE, blueValue));
+		// case TREE_ONE, TREE_TWO, TREE_THREE -> trees.add(new BackgroundTree(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE, blueValue));
 		}
 	}
 

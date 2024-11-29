@@ -24,6 +24,7 @@ public class State {
 
 	@SuppressWarnings("incomplete-switch")
 	public void setGamestate(Gamestate state) {
+		System.out.println("State: " + state.toString());
 		switch (state) {
 		case MENU -> flappyGame.getAudioPlayer().playSong(AudioPlayer.MENU_1);
 		case PLAYING -> flappyGame.getAudioPlayer().setLevelSong(flappyGame.getPlaying().getLevelManager().getLevelIndex());
