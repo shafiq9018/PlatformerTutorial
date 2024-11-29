@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.ArrayList;
 
@@ -155,7 +156,6 @@ public class Playing extends State implements Statemethods {
     }
 
     public void setPlayerCharacter(PlayerCharacter pc) {
-
         player = new Player(pc, this);
         player.loadLvlData(levelManager.getCurrentLevel().getLevelData());
         player.setSpawn(levelManager.getCurrentLevel().getPlayerSpawn());

@@ -82,10 +82,14 @@ public class Level {
 
 	private void loadEntities(int greenValue, int x, int y) {
 		switch (greenValue) {
-		case CRABBY -> crabs.add(new Crabby(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE));
-		case PINKSTAR -> pinkstars.add(new Pinkstar(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE));
-		case SHARK -> sharks.add(new Shark(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE));
-		case 100 -> playerSpawn = new Point(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE);
+//		case CRABBY -> crabs.add(new Crabby(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE));
+//		case PINKSTAR -> pinkstars.add(new Pinkstar(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE));
+//		case SHARK -> sharks.add(new Shark(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE));
+		case CRABBY -> crabs.add(new Crabby(25,25 ));
+		case PINKSTAR -> pinkstars.add(new Pinkstar(25 * 3,25 ));
+		case SHARK -> sharks.add(new Shark(25 * 5,25));		// case 100 -> playerSpawn = new Point(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE);
+		// Bird spawn point left of screen in the middle appx.
+		case 100 -> playerSpawn = new Point(5, 5);
 		}
 	}
 
