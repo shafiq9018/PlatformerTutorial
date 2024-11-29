@@ -10,7 +10,8 @@ import ui.AudioOptions;
 import ui.PauseButton;
 import ui.UrmButton;
 import utils.LoadSave;
-import static utils.Constants.UI.URMButtons.*;
+
+import static utils.Constants.UI.URMButtons.URM_SIZE;
 
 public class GameOptions extends State implements Statemethods {
 
@@ -47,30 +48,25 @@ public class GameOptions extends State implements Statemethods {
 	public void update() {
 		menuB.update();
 		audioOptions.update();
-
 	}
 
 	@Override
 	public void draw(Graphics g) {
 		g.drawImage(backgroundImg, 0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
 		g.drawImage(optionsBackgroundImg, bgX, bgY, bgW, bgH, null);
-
 		menuB.draw(g);
 		audioOptions.draw(g);
-
 	}
 
 	public void mouseDragged(MouseEvent e) {
 		audioOptions.mouseDragged(e);
 	}
-
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if (isIn(e, menuB)) {
 			menuB.setMousePressed(true);
 		} else
 			audioOptions.mousePressed(e);
-
 	}
 
 	@Override
@@ -82,7 +78,6 @@ public class GameOptions extends State implements Statemethods {
 			audioOptions.mouseReleased(e);
 
 		menuB.resetBools();
-
 	}
 
 	@Override
@@ -93,26 +88,22 @@ public class GameOptions extends State implements Statemethods {
 			menuB.setMouseOver(true);
 		else
 			audioOptions.mouseMoved(e);
-
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
 			Gamestate.state = Gamestate.MENU;
-
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	private boolean isIn(MouseEvent e, PauseButton b) {

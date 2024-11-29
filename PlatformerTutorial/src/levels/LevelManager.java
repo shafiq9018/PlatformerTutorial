@@ -31,8 +31,6 @@ public class LevelManager {
 		}
 
 		Level newLevel = levels.get(lvlIndex);
-//		flappyGame.getPlaying().getEnemyManager().loadEnemies(newLevel);
-//		flappyGame.getPlaying().getObjectManager().loadObjects(newLevel);
 		flappyGame.getPlaying().getPlayer().loadLvlData(newLevel.getLevelData());
 		flappyGame.getPlaying().setMaxLvlOffset(newLevel.getLvlOffset());
 	}

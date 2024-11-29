@@ -2,9 +2,10 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$">
+    <content url="file://$MODULE_DIR$/PlatformerTutorial">
       <sourceFolder url="file://$MODULE_DIR$/PlatformerTutorial/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/PlatformerTutorial/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PlatformerTutorial/src/utilz" isTestSource="false" packagePrefix="utils" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

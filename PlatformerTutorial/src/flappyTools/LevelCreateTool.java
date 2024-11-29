@@ -1,4 +1,4 @@
-package flappyTools
+package flappyTools;
 
 // Tool created by Shafiq Rahman 11/22/2024
 
@@ -94,7 +94,7 @@ public class LevelCreateTool {
             g.dispose();
 
             // Save the generated image
-            File outputFile = new File("res/flappy_bird_level.png");
+            File outputFile = new File("1.png");
             ImageIO.write(image, "png", outputFile);
 
             System.out.println("Image created: gen_red_bars_image.png");

@@ -5,25 +5,14 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import main.FlappyGame;
-import objects.Cannon;
-import objects.GameContainer;
-import objects.Potion;
-import objects.Spike;
-import utils.HelpMethods;
 
 import static utils.HelpMethods.GetLevelData;
-// import static utils.HelpMethods.GetCrabs;
 import static utils.HelpMethods.GetPlayerSpawn;
 
 public class Level {
 
 	private BufferedImage img;
 	private int[][] lvlData;
-	// private ArrayList<Crabby> crabs;
-	private ArrayList<Potion> potions;
-	private ArrayList<Spike> spikes;
-	private ArrayList<GameContainer> containers;
-	private ArrayList<Cannon> cannons;
 	private int lvlTilesWide;
 	private int maxTilesOffset;
 	private int maxLvlOffsetX;
@@ -32,30 +21,9 @@ public class Level {
 	public Level(BufferedImage img) {
 		this.img = img;
 		createLevelData();
-//		createEnemies();
-//		createPotions();
-//		createContainers();
-//		createSpikes();
-//		createCannons();
 		calcLvlOffsets();
 		calcPlayerSpawn();
 	}
-
-//	private void createCannons() {
-//		cannons = HelpMethods.GetCannons(img);
-//	}
-//
-//	private void createSpikes() {
-//		spikes = HelpMethods.GetSpikes(img);
-//	}
-//
-//	private void createContainers() {
-//		containers = HelpMethods.GetContainers(img);
-//	}
-//
-//	private void createPotions() {
-//		potions = HelpMethods.GetPotions(img);
-//	}
 
 	private void calcPlayerSpawn() {
 		playerSpawn = GetPlayerSpawn(img);
@@ -66,10 +34,6 @@ public class Level {
 		maxTilesOffset = lvlTilesWide - FlappyGame.TILES_IN_WIDTH;
 		maxLvlOffsetX = FlappyGame.TILES_SIZE * maxTilesOffset;
 	}
-
-//	private void createEnemies() {
-//		crabs = GetCrabs(img);
-//	}
 
 	private void createLevelData() {
 		lvlData = GetLevelData(img);
@@ -86,29 +50,9 @@ public class Level {
 	public int getLvlOffset() {
 		return maxLvlOffsetX;
 	}
-//
-//	public ArrayList<Crabby> getCrabs() {
-//		return crabs;
-//	}
 
 	public Point getPlayerSpawn() {
 		return playerSpawn;
 	}
-
-//	public ArrayList<Potion> getPotions() {
-//		return potions;
-//	}
-//
-//	public ArrayList<GameContainer> getContainers() {
-//		return containers;
-//	}
-//
-//	public ArrayList<Spike> getSpikes() {
-//		return spikes;
-//	}
-//
-//	public ArrayList<Cannon> getCannons(){
-//		return cannons;
-//	}
 
 }

@@ -1,8 +1,8 @@
 package objects;
 
-import static utils.Constants.ObjectConstants.*;
-
 import main.FlappyGame;
+
+import static utils.Constants.ObjectConstants.BOX;
 
 public class GameContainer extends GameObject {
 

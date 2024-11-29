@@ -7,7 +7,6 @@ import static utils.Constants.UI.VolumeButtons.VOLUME_HEIGHT;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
-import gamestates.Gamestate;
 import main.FlappyGame;
 
 public class AudioOptions {

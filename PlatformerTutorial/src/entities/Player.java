@@ -1,9 +1,5 @@
 package entities;
 
-import static utils.Constants.PlayerConstants.*;
-import static utils.HelpMethods.*;
-import static utils.Constants.*;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -14,6 +10,11 @@ import audio.AudioPlayer;
 import gamestates.Playing;
 import main.FlappyGame;
 import utils.LoadSave;
+
+import static utils.Constants.ANI_SPEED;
+import static utils.Constants.GRAVITY;
+import static utils.Constants.PlayerConstants.*;
+import static utils.HelpMethods.*;
 
 public class Player extends Entity {
 

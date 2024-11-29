@@ -1,4 +1,4 @@
-package flappyTools
+package flappyTools;
 
 // Tool created by Shafiq Rahman 11/22/2024
 

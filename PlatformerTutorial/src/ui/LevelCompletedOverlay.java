@@ -9,7 +9,8 @@ import gamestates.Gamestate;
 import gamestates.Playing;
 import main.FlappyGame;
 import utils.LoadSave;
-import static utils.Constants.UI.URMButtons.*;
+
+import static utils.Constants.UI.URMButtons.URM_SIZE;
 
 public class LevelCompletedOverlay {
 

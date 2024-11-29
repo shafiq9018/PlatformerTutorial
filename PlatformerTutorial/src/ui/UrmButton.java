@@ -4,7 +4,9 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import utils.LoadSave;
-import static utils.Constants.UI.URMButtons.*;
+
+import static utils.Constants.UI.URMButtons.URM_DEFAULT_SIZE;
+import static utils.Constants.UI.URMButtons.URM_SIZE;
 
 public class UrmButton extends PauseButton {
 	private BufferedImage[] imgs;
