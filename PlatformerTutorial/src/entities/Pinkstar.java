@@ -94,9 +94,9 @@ public class Pinkstar extends Enemy {
 		float xSpeed = 0;
 
 		if (walkDir == LEFT)
-			xSpeed = -walkSpeed;
+			xSpeed = -flySpeed;
 		else
-			xSpeed = walkSpeed;
+			xSpeed = flySpeed;
 
 		if (state == ATTACK)
 			xSpeed *= 2;

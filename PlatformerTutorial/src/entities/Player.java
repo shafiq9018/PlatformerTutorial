@@ -63,10 +63,10 @@ public class Player extends Entity {
     private int powerGrowTick;
 
     private final PlayerCharacter playerCharacter;
-    private  int birdScore = 0;
-    private  boolean birdEntered = false;
-    private  boolean birdExited = true;
-
+    private  int birdScore = 0;             // Added for score keeping
+    private  boolean birdEntered = false;   // Added for score keeping
+    private  boolean birdExited = true;     // Added for score keeping
+    private int playerAction = 7;           // Allways flying no jumping or other values.
 
     public Player(PlayerCharacter playerCharacter, Playing playing) {
         super(0, 0, (int) (playerCharacter.spriteW * FlappyGame.SCALE), (int) (playerCharacter.spriteH * FlappyGame.SCALE));
@@ -75,7 +75,7 @@ public class Player extends Entity {
         this.state = IDLE;
         this.maxHealth = 100;
         this.currentHealth = maxHealth;
-        this.walkSpeed = FlappyGame.SCALE * 1.0f;
+        this.flySpeed = FlappyGame.SCALE * 2.0f;    // Speed of the bird moving forward.
 
         // Load other player characters
         // animations = LoadSave.loadAnimations(playerCharacter);
@@ -117,8 +117,8 @@ public class Player extends Entity {
     public void setSpawn(Point spawn) {
 //        this.x = spawn.x;
 //        this.y = spawn.y;
-        this.x = 33;
-        this.y = 33;
+        this.x = 33;  // Hardcoded initial bird spawn position. All levels are a template of each other
+        this.y = 33;  // Hardcoded initial bird spawn position. All levels are a template of each other
         hitbox.x = x;
         hitbox.y = y;
     }
@@ -153,8 +153,8 @@ public class Player extends Entity {
     }
 
     public void update() {
-        updateHealthBar();
-        updatePowerBar();
+        // updateHealthBar();
+        // updatePowerBar();
 
         if (currentHealth <= 0) {
             if (state != DEAD) {
@@ -269,20 +269,22 @@ public class Player extends Entity {
         attackBox.y = hitbox.y + (FlappyGame.SCALE * 10);
     }
 
-    private void updateHealthBar() {
-        healthWidth = (int) ((currentHealth / (float) maxHealth) * healthBarWidth);
-    }
-
-    private void updatePowerBar() {
-        powerWidth = (int) ((powerValue / (float) powerMaxValue) * powerBarWidth);
-        powerGrowTick++;
-        if (powerGrowTick >= powerGrowSpeed) {
-            powerGrowTick = 0;
-            changePower(1);
-        }
-    }
+//    private void updateHealthBar() {
+//        healthWidth = (int) ((currentHealth / (float) maxHealth) * healthBarWidth);
+//    }
+//
+//    private void updatePowerBar() {
+//        powerWidth = (int) ((powerValue / (float) powerMaxValue) * powerBarWidth);
+//        powerGrowTick++;
+//        if (powerGrowTick >= powerGrowSpeed) {
+//            powerGrowTick = 0;
+//            changePower(1);
+//        }
+//    }
 
     public void render(Graphics g, int lvlOffset) {
+        System.out.println("render lvlOffset" + lvlOffset);
+        System.out.println("g " + g);
         g.drawImage(animations[playerCharacter.getRowIndex(state)][aniIndex], (int) (hitbox.x - playerCharacter.xDrawOffset) - lvlOffset + flipX, (int) (hitbox.y - playerCharacter.yDrawOffset + (int) (pushDrawOffset)), width * flipW, height, null);
         drawHitbox(g, lvlOffset);
         // drawAttackBox(g, lvlOffset); This is for if we need to set an attack area for the bird. Not used.
@@ -310,24 +312,46 @@ public class Player extends Entity {
         g.fillRect(powerBarXStart + statusBarX, powerBarYStart + statusBarY, powerWidth, powerBarHeight);
     }
 
+    // New animaation tick. review this before final thoughts.
+    //    private void updateAnimationTick() {
+    //        aniTick++;
+    //        if (aniTick >= ANI_SPEED) {
+    //            aniTick = 0;
+    //            aniIndex++;
+    //            if (aniIndex >= playerCharacter.getSpriteAmount(state)) {
+    //                aniIndex = 0;
+    //                attacking = false;
+    //                attackChecked = false;
+    //                if (state == HIT) {
+    //                    newState(IDLE);
+    //                    airSpeed = 0f;
+    //                    if (!IsFloor(hitbox, 0, lvlData))
+    //                        inAir = true;
+    //                }
+    //            }
+    //        }
+    //    }
+
+    // Old method
     private void updateAnimationTick() {
         aniTick++;
-        if (aniTick >= ANI_SPEED) {
+        // See Constants for bird count from animation sheet. - Shafiq.
+        if (aniTick >= GetSpriteAmount(playerAction)) { // This requires a count for the number of birds in the sheet.
             aniTick = 0;
             aniIndex++;
-            if (aniIndex >= playerCharacter.getSpriteAmount(state)) {
-                aniIndex = 0;
-                attacking = false;
-                attackChecked = false;
-                if (state == HIT) {
-                    newState(IDLE);
-                    airSpeed = 0f;
-                    if (!IsFloor(hitbox, 0, lvlData))
-                        inAir = true;
-                }
-            }
         }
+//        if (aniTick >= aniSpeed) {
+//            aniTick = 0;
+//            aniIndex++;
+//            if (aniIndex >= GetSpriteAmount(playerAction)) {
+//                aniIndex = 0;
+//                attacking = false;
+//            }
+//
+//        }
+
     }
+
 
     private void setAnimation() {
         int startAni = state;
@@ -385,12 +409,12 @@ public class Player extends Entity {
         float xSpeed = 0;
 
         if (left && !right) {
-            xSpeed -= walkSpeed;
+            xSpeed -= flySpeed;
             flipX = width;
             flipW = -1;
         }
         if (right && !left) {
-            xSpeed += walkSpeed;
+            xSpeed += flySpeed;
             flipX = 0;
             flipW = 1;
         }
@@ -398,9 +422,9 @@ public class Player extends Entity {
         if (powerAttackActive) {
             if ((!left && !right) || (left && right)) {
                 if (flipW == -1)
-                    xSpeed = -walkSpeed;
+                    xSpeed = -flySpeed;
                 else
-                    xSpeed = walkSpeed;
+                    xSpeed = flySpeed;
             }
 
             xSpeed *= 3;
@@ -529,7 +553,7 @@ public class Player extends Entity {
 
     public void resetAll() {
         resetDirBooleans();
-        inAir = false;
+        inAir = true; // Setting this true for the bird. It should always be in the air otherwise dead.
         attacking = false;
         moving = false;
         airSpeed = 0f;

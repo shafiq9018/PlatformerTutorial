@@ -267,7 +267,32 @@ public class Constants {
 		public static final int ATTACK = 4;
 		public static final int HIT = 5;
 		public static final int DEAD = 6;
+		public static final int FLYING = 7;
 
+		// Adding this old code back in for testing the birds flying. We can move to the newer
+		// enumerated character list above later.
+  		public static int GetSpriteAmount(int player_action) {
+			switch (player_action) {
+			case FLYING:
+				return 7;
+			case DEAD:
+				return 1;
+			case RUNNING:
+				return 11;
+			case IDLE:
+				return 11;
+			case HIT:
+				return 1;
+			case JUMP:
+			case ATTACK:
+				return 1;
+			case FALLING:
+				return 1;
+			default:
+				return 1;
+			}
+		}
+//	}
 //		public static int GetSpriteAmount(int player_action) {
 //			switch (player_action) {
 //			case DEAD:
@@ -286,6 +311,6 @@ public class Constants {
 //				return 1;
 //			}
 //		}
-	}
+}
 
 }

@@ -28,7 +28,7 @@ public abstract class Enemy extends Entity {
 
 		maxHealth = GetMaxHealth(enemyType);
 		currentHealth = maxHealth;
-		walkSpeed = FlappyGame.SCALE * 0.35f;
+		flySpeed = FlappyGame.SCALE * 0.35f;
 	}
 
 	protected void updateAttackBox() {
@@ -80,9 +80,9 @@ public abstract class Enemy extends Entity {
 		float xSpeed = 0;
 
 		if (walkDir == LEFT)
-			xSpeed = -walkSpeed;
+			xSpeed = -flySpeed;
 		else
-			xSpeed = walkSpeed;
+			xSpeed = flySpeed;
 
 		if (CanMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData))
 			if (IsFloor(hitbox, xSpeed, lvlData)) {

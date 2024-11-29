@@ -23,7 +23,7 @@ public abstract class Entity {
 	protected int maxHealth;
 	protected int currentHealth;
 	protected Rectangle2D.Float attackBox;
-	protected float walkSpeed;
+	protected float flySpeed;
 
 	protected int pushBackDir;
 	protected float pushDrawOffset;
@@ -54,9 +54,9 @@ public abstract class Entity {
 	protected void pushBack(int pushBackDir, int[][] lvlData, float speedMulti) {
 		float xSpeed = 0;
 		if (pushBackDir == LEFT)
-			xSpeed = -walkSpeed;
+			xSpeed = -flySpeed;
 		else
-			xSpeed = walkSpeed;
+			xSpeed = flySpeed;
 
 		if (CanMoveHere(hitbox.x + xSpeed * speedMulti, hitbox.y, hitbox.width, hitbox.height, lvlData))
 			hitbox.x += xSpeed * speedMulti;

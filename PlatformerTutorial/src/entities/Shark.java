@@ -68,9 +68,9 @@ public class Shark extends Enemy {
 		float xSpeed = 0;
 
 		if (walkDir == LEFT)
-			xSpeed = -walkSpeed;
+			xSpeed = -flySpeed;
 		else
-			xSpeed = walkSpeed;
+			xSpeed = flySpeed;
 
 		if (CanMoveHere(hitbox.x + xSpeed * 4, hitbox.y, hitbox.width, hitbox.height, lvlData))
 			if (IsFloor(hitbox, xSpeed * 4, lvlData)) {
