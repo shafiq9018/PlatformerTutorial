@@ -51,14 +51,12 @@ public class LoadSave {
     public static final String WATER_BOTTOM = "water.png";
     public static final String SHIP = "ship.png";
 
-
     public static BufferedImage[][] loadAnimations(PlayerCharacter pc) {
         BufferedImage img = LoadSave.GetSpriteAtlas(pc.playerAtlas);
         BufferedImage[][] animations = new BufferedImage[pc.rowA][pc.colA];
         for (int j = 0; j < animations.length; j++)
             for (int i = 0; i < animations[j].length; i++)
                 animations[j][i] = img.getSubimage(i * pc.spriteW, j * pc.spriteH, pc.spriteW, pc.spriteH);
-
         return animations;
     }
 
@@ -84,33 +82,28 @@ public class LoadSave {
     public static BufferedImage[] GetAllLevels() {
         URL url = LoadSave.class.getResource("/lvls");
         File file = null;
-
         try {
             file = new File(url.toURI());
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-
         File[] files = file.listFiles();
         File[] filesSorted = new File[files.length];
-
         for (int i = 0; i < filesSorted.length; i++)
             for (int j = 0; j < files.length; j++) {
-                if (files[j].getName().equals((i + 1) + ".png"))
+                if (files[j].getName().equals((i + 1) + ".png")){
                     filesSorted[i] = files[j];
-
+                    System.out.println("File: " + files[j].getName() + ", File: " + files[j].getPath());
+                }
             }
-
         BufferedImage[] imgs = new BufferedImage[filesSorted.length];
-
         for (int i = 0; i < imgs.length; i++)
             try {
                 imgs[i] = ImageIO.read(filesSorted[i]);
+                System.out.println("imgs: length of each image " + imgs[i]);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         return imgs;
     }
-
 }
