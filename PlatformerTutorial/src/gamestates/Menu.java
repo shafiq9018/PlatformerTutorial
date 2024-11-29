@@ -5,9 +5,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-import main.Game;
+import main.FlappyGame;
 import ui.MenuButton;
-import utilz.LoadSave;
+import utils.LoadSave;
 
 public class Menu extends State implements Statemethods {
 
@@ -15,8 +15,8 @@ public class Menu extends State implements Statemethods {
 	private BufferedImage backgroundImg, backgroundImgPink;
 	private int menuX, menuY, menuWidth, menuHeight;
 
-	public Menu(Game game) {
-		super(game);
+	public Menu(FlappyGame flappyGame) {
+		super(flappyGame);
 		loadButtons();
 		loadBackground();
 		backgroundImgPink = LoadSave.GetSpriteAtlas(LoadSave.MENU_BACKGROUND_IMG);
@@ -25,16 +25,16 @@ public class Menu extends State implements Statemethods {
 
 	private void loadBackground() {
 		backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.MENU_BACKGROUND);
-		menuWidth = (int) (backgroundImg.getWidth() * Game.SCALE);
-		menuHeight = (int) (backgroundImg.getHeight() * Game.SCALE);
-		menuX = Game.GAME_WIDTH / 2 - menuWidth / 2;
-		menuY = (int) (45 * Game.SCALE);
+		menuWidth = (int) (backgroundImg.getWidth() * FlappyGame.SCALE);
+		menuHeight = (int) (backgroundImg.getHeight() * FlappyGame.SCALE);
+		menuX = FlappyGame.GAME_WIDTH / 2 - menuWidth / 2;
+		menuY = (int) (45 * FlappyGame.SCALE);
 	}
 
 	private void loadButtons() {
-		buttons[0] = new MenuButton(Game.GAME_WIDTH / 2, (int) (150 * Game.SCALE), 0, Gamestate.PLAYING);
-		buttons[1] = new MenuButton(Game.GAME_WIDTH / 2, (int) (220 * Game.SCALE), 1, Gamestate.OPTIONS);
-		buttons[2] = new MenuButton(Game.GAME_WIDTH / 2, (int) (290 * Game.SCALE), 2, Gamestate.QUIT);
+		buttons[0] = new MenuButton(FlappyGame.GAME_WIDTH / 2, (int) (150 * FlappyGame.SCALE), 0, Gamestate.PLAYING);
+		buttons[1] = new MenuButton(FlappyGame.GAME_WIDTH / 2, (int) (220 * FlappyGame.SCALE), 1, Gamestate.OPTIONS);
+		buttons[2] = new MenuButton(FlappyGame.GAME_WIDTH / 2, (int) (290 * FlappyGame.SCALE), 2, Gamestate.QUIT);
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class Menu extends State implements Statemethods {
 	@Override
 	public void draw(Graphics g) {
 
-		g.drawImage(backgroundImgPink, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
+		g.drawImage(backgroundImgPink, 0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
 		g.drawImage(backgroundImg, menuX, menuY, menuWidth, menuHeight, null);
 
 		for (MenuButton mb : buttons)
@@ -75,7 +75,7 @@ public class Menu extends State implements Statemethods {
 				if (mb.isMousePressed())
 					mb.applyGamestate();
 				if (mb.getState() == Gamestate.PLAYING)
-					game.getAudioPlayer().setLevelSong(game.getPlaying().getLevelManager().getLevelIndex());
+					flappyGame.getAudioPlayer().setLevelSong(flappyGame.getPlaying().getLevelManager().getLevelIndex());
 				break;
 			}
 		}

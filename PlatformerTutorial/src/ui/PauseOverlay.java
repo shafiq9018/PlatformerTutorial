@@ -6,11 +6,11 @@ import java.awt.image.BufferedImage;
 
 import gamestates.Gamestate;
 import gamestates.Playing;
-import main.Game;
-import utilz.LoadSave;
-import static utilz.Constants.UI.PauseButtons.*;
-import static utilz.Constants.UI.URMButtons.*;
-import static utilz.Constants.UI.VolumeButtons.*;
+import main.FlappyGame;
+import utils.LoadSave;
+import static utils.Constants.UI.PauseButtons.*;
+import static utils.Constants.UI.URMButtons.*;
+import static utils.Constants.UI.VolumeButtons.*;
 
 public class PauseOverlay {
 
@@ -30,10 +30,10 @@ public class PauseOverlay {
 	}
 
 	private void createUrmButtons() {
-		int menuX = (int) (313 * Game.SCALE);
-		int replayX = (int) (387 * Game.SCALE);
-		int unpauseX = (int) (462 * Game.SCALE);
-		int bY = (int) (325 * Game.SCALE);
+		int menuX = (int) (313 * FlappyGame.SCALE);
+		int replayX = (int) (387 * FlappyGame.SCALE);
+		int unpauseX = (int) (462 * FlappyGame.SCALE);
+		int bY = (int) (325 * FlappyGame.SCALE);
 
 		menuB = new UrmButton(menuX, bY, URM_SIZE, URM_SIZE, 2);
 		replayB = new UrmButton(replayX, bY, URM_SIZE, URM_SIZE, 1);
@@ -42,10 +42,10 @@ public class PauseOverlay {
 
 	private void loadBackground() {
 		backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.PAUSE_BACKGROUND);
-		bgW = (int) (backgroundImg.getWidth() * Game.SCALE);
-		bgH = (int) (backgroundImg.getHeight() * Game.SCALE);
-		bgX = Game.GAME_WIDTH / 2 - bgW / 2;
-		bgY = (int) (25 * Game.SCALE);
+		bgW = (int) (backgroundImg.getWidth() * FlappyGame.SCALE);
+		bgH = (int) (backgroundImg.getHeight() * FlappyGame.SCALE);
+		bgX = FlappyGame.GAME_WIDTH / 2 - bgW / 2;
+		bgY = (int) (25 * FlappyGame.SCALE);
 	}
 
 	public void update() {

@@ -4,16 +4,16 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import main.Game;
+import main.FlappyGame;
 import objects.Cannon;
 import objects.GameContainer;
 import objects.Potion;
 import objects.Spike;
-import utilz.HelpMethods;
+import utils.HelpMethods;
 
-import static utilz.HelpMethods.GetLevelData;
-// import static utilz.HelpMethods.GetCrabs;
-import static utilz.HelpMethods.GetPlayerSpawn;
+import static utils.HelpMethods.GetLevelData;
+// import static utils.HelpMethods.GetCrabs;
+import static utils.HelpMethods.GetPlayerSpawn;
 
 public class Level {
 
@@ -63,8 +63,8 @@ public class Level {
 
 	private void calcLvlOffsets() {
 		lvlTilesWide = img.getWidth();
-		maxTilesOffset = lvlTilesWide - Game.TILES_IN_WIDTH;
-		maxLvlOffsetX = Game.TILES_SIZE * maxTilesOffset;
+		maxTilesOffset = lvlTilesWide - FlappyGame.TILES_IN_WIDTH;
+		maxLvlOffsetX = FlappyGame.TILES_SIZE * maxTilesOffset;
 	}
 
 //	private void createEnemies() {

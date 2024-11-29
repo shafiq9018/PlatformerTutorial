@@ -5,8 +5,8 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import gamestates.Gamestate;
-import utilz.LoadSave;
-import static utilz.Constants.UI.Buttons.*;
+import utils.LoadSave;
+import static utils.Constants.UI.Buttons.*;
 
 public class MenuButton {
 	private int xPos, yPos, rowIndex, index;

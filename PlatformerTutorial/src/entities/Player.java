@@ -1,8 +1,8 @@
 package entities;
 
-import static utilz.Constants.PlayerConstants.*;
-import static utilz.HelpMethods.*;
-import static utilz.Constants.*;
+import static utils.Constants.PlayerConstants.*;
+import static utils.HelpMethods.*;
+import static utils.Constants.*;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -12,8 +12,8 @@ import java.awt.image.BufferedImage;
 
 import audio.AudioPlayer;
 import gamestates.Playing;
-import main.Game;
-import utilz.LoadSave;
+import main.FlappyGame;
+import utils.LoadSave;
 
 public class Player extends Entity {
 
@@ -21,25 +21,25 @@ public class Player extends Entity {
 	private boolean moving = false, attacking = false;
 	private boolean left, right, jump;
 	private int[][] lvlData;
-	private float xDrawOffset = 21 * Game.SCALE;
-	private float yDrawOffset = 4 * Game.SCALE;
+	private float xDrawOffset = 21 * FlappyGame.SCALE;
+	private float yDrawOffset = 4 * FlappyGame.SCALE;
 
 	// Jumping / Gravity
-	private float jumpSpeed = -2.25f * Game.SCALE;
-	private float fallSpeedAfterCollision = 0.5f * Game.SCALE;
+	private float jumpSpeed = -2.25f * FlappyGame.SCALE;
+	private float fallSpeedAfterCollision = 0.5f * FlappyGame.SCALE;
 
 	// StatusBarUI
 	private BufferedImage statusBarImg;
 
-	private int statusBarWidth = (int) (192 * Game.SCALE);
-	private int statusBarHeight = (int) (58 * Game.SCALE);
-	private int statusBarX = (int) (10 * Game.SCALE);
-	private int statusBarY = (int) (10 * Game.SCALE);
+	private int statusBarWidth = (int) (192 * FlappyGame.SCALE);
+	private int statusBarHeight = (int) (58 * FlappyGame.SCALE);
+	private int statusBarX = (int) (10 * FlappyGame.SCALE);
+	private int statusBarY = (int) (10 * FlappyGame.SCALE);
 
-	private int healthBarWidth = (int) (150 * Game.SCALE);
-	private int healthBarHeight = (int) (4 * Game.SCALE);
-	private int healthBarXStart = (int) (34 * Game.SCALE);
-	private int healthBarYStart = (int) (14 * Game.SCALE);
+	private int healthBarWidth = (int) (150 * FlappyGame.SCALE);
+	private int healthBarHeight = (int) (4 * FlappyGame.SCALE);
+	private int healthBarXStart = (int) (34 * FlappyGame.SCALE);
+	private int healthBarYStart = (int) (14 * FlappyGame.SCALE);
 	private int healthWidth = healthBarWidth;
 
 	private int flipX = 0;
@@ -56,7 +56,7 @@ public class Player extends Entity {
 		this.state = IDLE;
 		this.maxHealth = 100;
 		this.currentHealth = 35;
-		this.walkSpeed = Game.SCALE * 1.0f;
+		this.walkSpeed = FlappyGame.SCALE * 1.0f;
 		loadAnimations();
 		initHitbox(20, 27);
 		initAttackBox();
@@ -70,7 +70,7 @@ public class Player extends Entity {
 	}
 
 	private void initAttackBox() {
-		attackBox = new Rectangle2D.Float(x, y, (int) (20 * Game.SCALE), (int) (20 * Game.SCALE));
+		attackBox = new Rectangle2D.Float(x, y, (int) (20 * FlappyGame.SCALE), (int) (20 * FlappyGame.SCALE));
 	}
 
 	public void update() {
@@ -99,7 +99,7 @@ public class Player extends Entity {
 //		if (moving) {
 //			checkPotionTouched();
 //			checkSpikesTouched();
-//			tileY = (int) (hitbox.y / Game.TILES_SIZE);
+//			tileY = (int) (hitbox.y / FlappyGame.TILES_SIZE);
 //		}
 //		if (attacking)
 //			checkAttack();
@@ -128,11 +128,11 @@ public class Player extends Entity {
 
 	private void updateAttackBox() {
 		if (right)
-			attackBox.x = hitbox.x + hitbox.width + (int) (Game.SCALE * 10);
+			attackBox.x = hitbox.x + hitbox.width + (int) (FlappyGame.SCALE * 10);
 		else if (left)
-			attackBox.x = hitbox.x - hitbox.width - (int) (Game.SCALE * 10);
+			attackBox.x = hitbox.x - hitbox.width - (int) (FlappyGame.SCALE * 10);
 
-		attackBox.y = hitbox.y + (Game.SCALE * 10);
+		attackBox.y = hitbox.y + (FlappyGame.SCALE * 10);
 	}
 
 	private void updateHealthBar() {

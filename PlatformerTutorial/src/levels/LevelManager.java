@@ -5,18 +5,18 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import gamestates.Gamestate;
-import main.Game;
-import utilz.LoadSave;
+import main.FlappyGame;
+import utils.LoadSave;
 
 public class LevelManager {
 
-	private Game game;
+	private FlappyGame flappyGame;
 	private BufferedImage[] levelSprite;
 	private ArrayList<Level> levels;
 	private int lvlIndex = 0;
 
-	public LevelManager(Game game) {
-		this.game = game;
+	public LevelManager(FlappyGame flappyGame) {
+		this.flappyGame = flappyGame;
 		importOutsideSprites();
 		levels = new ArrayList<>();
 		buildAllLevels();
@@ -26,15 +26,15 @@ public class LevelManager {
 		lvlIndex++;
 		if (lvlIndex >= levels.size()) {
 			lvlIndex = 0;
-			System.out.println("No more levels! Game Completed!");
+			System.out.println("No more levels! FlappyGame Completed!");
 			Gamestate.state = Gamestate.MENU;
 		}
 
 		Level newLevel = levels.get(lvlIndex);
-//		game.getPlaying().getEnemyManager().loadEnemies(newLevel);
-//		game.getPlaying().getObjectManager().loadObjects(newLevel);
-		game.getPlaying().getPlayer().loadLvlData(newLevel.getLevelData());
-		game.getPlaying().setMaxLvlOffset(newLevel.getLvlOffset());
+//		flappyGame.getPlaying().getEnemyManager().loadEnemies(newLevel);
+//		flappyGame.getPlaying().getObjectManager().loadObjects(newLevel);
+		flappyGame.getPlaying().getPlayer().loadLvlData(newLevel.getLevelData());
+		flappyGame.getPlaying().setMaxLvlOffset(newLevel.getLvlOffset());
 	}
 
 	private void buildAllLevels() {
@@ -54,10 +54,10 @@ public class LevelManager {
 	}
 
 	public void draw(Graphics g, int lvlOffset) {
-		for (int j = 0; j < Game.TILES_IN_HEIGHT; j++)
+		for (int j = 0; j < FlappyGame.TILES_IN_HEIGHT; j++)
 			for (int i = 0; i < levels.get(lvlIndex).getLevelData()[0].length; i++) {
 				int index = levels.get(lvlIndex).getSpriteIndex(i, j);
-				g.drawImage(levelSprite[index], Game.TILES_SIZE * i - lvlOffset, Game.TILES_SIZE * j, Game.TILES_SIZE, Game.TILES_SIZE, null);
+				g.drawImage(levelSprite[index], FlappyGame.TILES_SIZE * i - lvlOffset, FlappyGame.TILES_SIZE * j, FlappyGame.TILES_SIZE, FlappyGame.TILES_SIZE, null);
 			}
 	}
 

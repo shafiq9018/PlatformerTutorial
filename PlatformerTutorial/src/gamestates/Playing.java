@@ -10,13 +10,13 @@ import java.util.Random;
 
 import entities.Player;
 import levels.LevelManager;
-import main.Game;
+import main.FlappyGame;
 import objects.ObjectManager;
 import ui.GameOverOverlay;
 import ui.LevelCompletedOverlay;
 import ui.PauseOverlay;
-import utilz.LoadSave;
-import static utilz.Constants.Environment.*;
+import utils.LoadSave;
+import static utils.Constants.Environment.*;
 
 public class Playing extends State implements Statemethods {
 	private Player player;
@@ -29,8 +29,8 @@ public class Playing extends State implements Statemethods {
 	private boolean paused = false;
 
 	private int xLvlOffset;
-	private int leftBorder = (int) (0.2 * Game.GAME_WIDTH);
-	private int rightBorder = (int) (0.8 * Game.GAME_WIDTH);
+	private int leftBorder = (int) (0.2 * FlappyGame.GAME_WIDTH);
+	private int rightBorder = (int) (0.8 * FlappyGame.GAME_WIDTH);
 	private int maxLvlOffsetX;
 
 	private BufferedImage backgroundImg, bigCloud, smallCloud;
@@ -41,8 +41,8 @@ public class Playing extends State implements Statemethods {
 	private boolean lvlCompleted;
 	private boolean playerDying;
 
-	public Playing(Game game) {
-		super(game);
+	public Playing(FlappyGame flappyGame) {
+		super(flappyGame);
 		initClasses();
 
 		backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.PLAYING_BG_IMG);
@@ -50,7 +50,7 @@ public class Playing extends State implements Statemethods {
 		smallCloud = LoadSave.GetSpriteAtlas(LoadSave.SMALL_CLOUDS);
 		smallCloudsPos = new int[8];
 		for (int i = 0; i < smallCloudsPos.length; i++)
-			smallCloudsPos[i] = (int) (90 * Game.SCALE) + rnd.nextInt((int) (100 * Game.SCALE));
+			smallCloudsPos[i] = (int) (90 * FlappyGame.SCALE) + rnd.nextInt((int) (100 * FlappyGame.SCALE));
 
 		calcLvlOffset();
 		loadStartLevel();
@@ -72,11 +72,11 @@ public class Playing extends State implements Statemethods {
 	}
 
 	private void initClasses() {
-		levelManager = new LevelManager(game);
+		levelManager = new LevelManager(flappyGame);
 		// enemyManager = new EnemyManager(this);
 //		objectManager = new ObjectManager(this);
 
-		player = new Player(200, 200, (int) (64 * Game.SCALE), (int) (40 * Game.SCALE), this);
+		player = new Player(200, 200, (int) (64 * FlappyGame.SCALE), (int) (40 * FlappyGame.SCALE), this);
 		player.loadLvlData(levelManager.getCurrentLevel().getLevelData());
 		player.setSpawn(levelManager.getCurrentLevel().getPlayerSpawn());
 
@@ -121,7 +121,7 @@ public class Playing extends State implements Statemethods {
 
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage(backgroundImg, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
+		g.drawImage(backgroundImg, 0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
 
 		drawClouds(g);
 
@@ -132,7 +132,7 @@ public class Playing extends State implements Statemethods {
 
 		if (paused) {
 			g.setColor(new Color(0, 0, 0, 150));
-			g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
+			g.fillRect(0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT);
 			pauseOverlay.draw(g);
 		} else if (gameOver)
 			gameOverOverlay.draw(g);
@@ -142,7 +142,7 @@ public class Playing extends State implements Statemethods {
 
 	private void drawClouds(Graphics g) {
 		for (int i = 0; i < 3; i++)
-			g.drawImage(bigCloud, i * BIG_CLOUD_WIDTH - (int) (xLvlOffset * 0.3), (int) (204 * Game.SCALE), BIG_CLOUD_WIDTH, BIG_CLOUD_HEIGHT, null);
+			g.drawImage(bigCloud, i * BIG_CLOUD_WIDTH - (int) (xLvlOffset * 0.3), (int) (204 * FlappyGame.SCALE), BIG_CLOUD_WIDTH, BIG_CLOUD_HEIGHT, null);
 
 		for (int i = 0; i < smallCloudsPos.length; i++)
 			g.drawImage(smallCloud, SMALL_CLOUD_WIDTH * 4 * i - (int) (xLvlOffset * 0.7), smallCloudsPos[i], SMALL_CLOUD_WIDTH, SMALL_CLOUD_HEIGHT, null);
@@ -266,7 +266,7 @@ public class Playing extends State implements Statemethods {
 	public void setLevelCompleted(boolean levelCompleted) {
 		this.lvlCompleted = levelCompleted;
 		if(levelCompleted)
-			game.getAudioPlayer().lvlCompleted();
+			flappyGame.getAudioPlayer().lvlCompleted();
 	}
 
 	public void setMaxLvlOffset(int lvlOffset) {

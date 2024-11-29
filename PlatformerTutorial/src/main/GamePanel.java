@@ -5,17 +5,17 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
-import static main.Game.GAME_HEIGHT;
-import static main.Game.GAME_WIDTH;
+import static main.FlappyGame.GAME_HEIGHT;
+import static main.FlappyGame.GAME_WIDTH;
 
 public class GamePanel extends JPanel {
 
 	private MouseInputs mouseInputs;
-	private Game game;
+	private FlappyGame flappyGame;
 
-	public GamePanel(Game game) {
+	public GamePanel(FlappyGame flappyGame) {
 		mouseInputs = new MouseInputs(this);
-		this.game = game;
+		this.flappyGame = flappyGame;
 		setPanelSize();
 		addKeyListener(new KeyboardInputs(this));
 		addMouseListener(mouseInputs);
@@ -33,11 +33,11 @@ public class GamePanel extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		game.render(g);
+		flappyGame.render(g);
 	}
 
-	public Game getGame() {
-		return game;
+	public FlappyGame getGame() {
+		return flappyGame;
 	}
 
 }

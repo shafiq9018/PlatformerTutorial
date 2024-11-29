@@ -1,7 +1,7 @@
-package utilz;
+package utils;
 
-import static utilz.Constants.EnemyConstants.CRABBY;
-import static utilz.Constants.ObjectConstants.*;
+import static utils.Constants.EnemyConstants.CRABBY;
+import static utils.Constants.ObjectConstants.*;
 
 import java.awt.Color;
 import java.awt.Point;
@@ -9,7 +9,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import main.Game;
+import main.FlappyGame;
 import objects.Cannon;
 import objects.GameContainer;
 import objects.Potion;
@@ -28,13 +28,13 @@ public class HelpMethods {
 	}
 
 	private static boolean IsSolid(float x, float y, int[][] lvlData) {
-		int maxWidth = lvlData[0].length * Game.TILES_SIZE;
+		int maxWidth = lvlData[0].length * FlappyGame.TILES_SIZE;
 		if (x < 0 || x >= maxWidth)
 			return true;
-		if (y < 0 || y >= Game.GAME_HEIGHT)
+		if (y < 0 || y >= FlappyGame.GAME_HEIGHT)
 			return true;
-		float xIndex = x / Game.TILES_SIZE;
-		float yIndex = y / Game.TILES_SIZE;
+		float xIndex = x / FlappyGame.TILES_SIZE;
+		float yIndex = y / FlappyGame.TILES_SIZE;
 
 		return IsTileSolid((int) xIndex, (int) yIndex, lvlData);
 	}
@@ -53,27 +53,27 @@ public class HelpMethods {
 	}
 
 	public static float GetEntityXPosNextToWall(Rectangle2D.Float hitbox, float xSpeed) {
-		int currentTile = (int) (hitbox.x / Game.TILES_SIZE);
+		int currentTile = (int) (hitbox.x / FlappyGame.TILES_SIZE);
 		if (xSpeed > 0) {
 			// Right
-			int tileXPos = currentTile * Game.TILES_SIZE;
-			int xOffset = (int) (Game.TILES_SIZE - hitbox.width);
+			int tileXPos = currentTile * FlappyGame.TILES_SIZE;
+			int xOffset = (int) (FlappyGame.TILES_SIZE - hitbox.width);
 			return tileXPos + xOffset - 1;
 		} else
 			// Left
-			return currentTile * Game.TILES_SIZE;
+			return currentTile * FlappyGame.TILES_SIZE;
 	}
 
 	public static float GetEntityYPosUnderRoofOrAboveFloor(Rectangle2D.Float hitbox, float airSpeed) {
-		int currentTile = (int) (hitbox.y / Game.TILES_SIZE);
+		int currentTile = (int) (hitbox.y / FlappyGame.TILES_SIZE);
 		if (airSpeed > 0) {
 			// Falling - touching floor
-			int tileYPos = currentTile * Game.TILES_SIZE;
-			int yOffset = (int) (Game.TILES_SIZE - hitbox.height);
+			int tileYPos = currentTile * FlappyGame.TILES_SIZE;
+			int yOffset = (int) (FlappyGame.TILES_SIZE - hitbox.height);
 			return tileYPos + yOffset - 1;
 		} else
 			// Jumping
-			return currentTile * Game.TILES_SIZE;
+			return currentTile * FlappyGame.TILES_SIZE;
 
 	}
 
@@ -92,8 +92,8 @@ public class HelpMethods {
 	}
 
 	public static boolean CanCannonSeePlayer(int[][] lvlData, Rectangle2D.Float firstHitbox, Rectangle2D.Float secondHitbox, int yTile) {
-		int firstXTile = (int) (firstHitbox.x / Game.TILES_SIZE);
-		int secondXTile = (int) (secondHitbox.x / Game.TILES_SIZE);
+		int firstXTile = (int) (firstHitbox.x / FlappyGame.TILES_SIZE);
+		int secondXTile = (int) (secondHitbox.x / FlappyGame.TILES_SIZE);
 
 		if (firstXTile > secondXTile)
 			return IsAllTilesClear(secondXTile, firstXTile, yTile, lvlData);
@@ -118,8 +118,8 @@ public class HelpMethods {
 	}
 
 	public static boolean IsSightClear(int[][] lvlData, Rectangle2D.Float firstHitbox, Rectangle2D.Float secondHitbox, int yTile) {
-		int firstXTile = (int) (firstHitbox.x / Game.TILES_SIZE);
-		int secondXTile = (int) (secondHitbox.x / Game.TILES_SIZE);
+		int firstXTile = (int) (firstHitbox.x / FlappyGame.TILES_SIZE);
+		int secondXTile = (int) (secondHitbox.x / FlappyGame.TILES_SIZE);
 
 		if (firstXTile > secondXTile)
 			return IsAllTilesWalkable(secondXTile, firstXTile, yTile, lvlData);
@@ -147,7 +147,7 @@ public class HelpMethods {
 //				Color color = new Color(img.getRGB(i, j));
 //				int value = color.getGreen();
 //				if (value == CRABBY)
-//					list.add(new Crabby(i * Game.TILES_SIZE, j * Game.TILES_SIZE));
+//					list.add(new Crabby(i * FlappyGame.TILES_SIZE, j * FlappyGame.TILES_SIZE));
 //			}
 //		return list;
 //	}
@@ -158,9 +158,9 @@ public class HelpMethods {
 				Color color = new Color(img.getRGB(i, j));
 				int value = color.getGreen();
 				if (value == 100)
-					return new Point(i * Game.TILES_SIZE, j * Game.TILES_SIZE);
+					return new Point(i * FlappyGame.TILES_SIZE, j * FlappyGame.TILES_SIZE);
 			}
-		return new Point(1 * Game.TILES_SIZE, 1 * Game.TILES_SIZE);
+		return new Point(1 * FlappyGame.TILES_SIZE, 1 * FlappyGame.TILES_SIZE);
 	}
 
 //	public static ArrayList<Potion> GetPotions(BufferedImage img) {
@@ -170,7 +170,7 @@ public class HelpMethods {
 //				Color color = new Color(img.getRGB(i, j));
 //				int value = color.getBlue();
 //				if (value == RED_POTION || value == BLUE_POTION)
-//					list.add(new Potion(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
+//					list.add(new Potion(i * FlappyGame.TILES_SIZE, j * FlappyGame.TILES_SIZE, value));
 //			}
 //
 //		return list;
@@ -183,7 +183,7 @@ public class HelpMethods {
 //				Color color = new Color(img.getRGB(i, j));
 //				int value = color.getBlue();
 //				if (value == BOX || value == BARREL)
-//					list.add(new GameContainer(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
+//					list.add(new GameContainer(i * FlappyGame.TILES_SIZE, j * FlappyGame.TILES_SIZE, value));
 //			}
 //
 //		return list;
@@ -197,7 +197,7 @@ public class HelpMethods {
 //				Color color = new Color(img.getRGB(i, j));
 //				int value = color.getBlue();
 //				if (value == SPIKE)
-//					list.add(new Spike(i * Game.TILES_SIZE, j * Game.TILES_SIZE, SPIKE));
+//					list.add(new Spike(i * FlappyGame.TILES_SIZE, j * FlappyGame.TILES_SIZE, SPIKE));
 //			}
 //
 //		return list;
@@ -211,7 +211,7 @@ public class HelpMethods {
 //				Color color = new Color(img.getRGB(i, j));
 //				int value = color.getBlue();
 //				if (value == CANNON_LEFT || value == CANNON_RIGHT)
-//					list.add(new Cannon(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
+//					list.add(new Cannon(i * FlappyGame.TILES_SIZE, j * FlappyGame.TILES_SIZE, value));
 //			}
 //
 //		return list;

@@ -3,8 +3,8 @@ package ui;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import utilz.LoadSave;
-import static utilz.Constants.UI.PauseButtons.*;
+import utils.LoadSave;
+import static utils.Constants.UI.PauseButtons.*;
 
 public class SoundButton extends PauseButton {
 

@@ -5,12 +5,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-import main.Game;
+import main.FlappyGame;
 import ui.AudioOptions;
 import ui.PauseButton;
 import ui.UrmButton;
-import utilz.LoadSave;
-import static utilz.Constants.UI.URMButtons.*;
+import utils.LoadSave;
+import static utils.Constants.UI.URMButtons.*;
 
 public class GameOptions extends State implements Statemethods {
 
@@ -19,16 +19,16 @@ public class GameOptions extends State implements Statemethods {
 	private int bgX, bgY, bgW, bgH;
 	private UrmButton menuB;
 
-	public GameOptions(Game game) {
-		super(game);
+	public GameOptions(FlappyGame flappyGame) {
+		super(flappyGame);
 		loadImgs();
 		loadButton();
-		audioOptions = game.getAudioOptions();
+		audioOptions = flappyGame.getAudioOptions();
 	}
 
 	private void loadButton() {
-		int menuX = (int) (387 * Game.SCALE);
-		int menuY = (int) (325 * Game.SCALE);
+		int menuX = (int) (387 * FlappyGame.SCALE);
+		int menuY = (int) (325 * FlappyGame.SCALE);
 
 		menuB = new UrmButton(menuX, menuY, URM_SIZE, URM_SIZE, 2);
 	}
@@ -37,10 +37,10 @@ public class GameOptions extends State implements Statemethods {
 		backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.MENU_BACKGROUND_IMG);
 		optionsBackgroundImg = LoadSave.GetSpriteAtlas(LoadSave.OPTIONS_MENU);
 
-		bgW = (int) (optionsBackgroundImg.getWidth() * Game.SCALE);
-		bgH = (int) (optionsBackgroundImg.getHeight() * Game.SCALE);
-		bgX = Game.GAME_WIDTH / 2 - bgW / 2;
-		bgY = (int) (33 * Game.SCALE);
+		bgW = (int) (optionsBackgroundImg.getWidth() * FlappyGame.SCALE);
+		bgH = (int) (optionsBackgroundImg.getHeight() * FlappyGame.SCALE);
+		bgX = FlappyGame.GAME_WIDTH / 2 - bgW / 2;
+		bgY = (int) (33 * FlappyGame.SCALE);
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class GameOptions extends State implements Statemethods {
 
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage(backgroundImg, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
+		g.drawImage(backgroundImg, 0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
 		g.drawImage(optionsBackgroundImg, bgX, bgY, bgW, bgH, null);
 
 		menuB.draw(g);

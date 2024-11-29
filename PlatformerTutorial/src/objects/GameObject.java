@@ -1,13 +1,13 @@
 package objects;
 
-import static utilz.Constants.ANI_SPEED;
-import static utilz.Constants.ObjectConstants.*;
+import static utils.Constants.ANI_SPEED;
+import static utils.Constants.ObjectConstants.*;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 
-import main.Game;
+import main.FlappyGame;
 
 public class GameObject {
 
@@ -51,7 +51,7 @@ public class GameObject {
 	}
 
 	protected void initHitbox(int width, int height) {
-		hitbox = new Rectangle2D.Float(x, y, (int) (width * Game.SCALE), (int) (height * Game.SCALE));
+		hitbox = new Rectangle2D.Float(x, y, (int) (width * FlappyGame.SCALE), (int) (height * FlappyGame.SCALE));
 	}
 
 	public void drawHitbox(Graphics g, int xLvlOffset) {
