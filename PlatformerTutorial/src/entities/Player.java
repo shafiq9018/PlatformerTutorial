@@ -284,7 +284,7 @@ public class Player extends Entity {
 
     public void render(Graphics g, int lvlOffset) {
         System.out.println("render lvlOffset" + lvlOffset);
-        System.out.println("g " + g);
+        System.out.println("g " + g.toString());
         g.drawImage(animations[playerCharacter.getRowIndex(state)][aniIndex], (int) (hitbox.x - playerCharacter.xDrawOffset) - lvlOffset + flipX, (int) (hitbox.y - playerCharacter.yDrawOffset + (int) (pushDrawOffset)), width * flipW, height, null);
         drawHitbox(g, lvlOffset);
         // drawAttackBox(g, lvlOffset); This is for if we need to set an attack area for the bird. Not used.
