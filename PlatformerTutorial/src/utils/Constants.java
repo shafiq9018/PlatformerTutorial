@@ -19,7 +19,6 @@ public class Constants {
 			case QUESTION, EXCLAMATION:
 				return 5;
 			}
-
 			return 0;
 		}
 	}

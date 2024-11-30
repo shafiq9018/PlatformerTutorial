@@ -25,7 +25,7 @@ public class GameContainer extends GameObject {
 		}
 
 		hitbox.y += yDrawOffset + (int) (FlappyGame.SCALE * 2);
-		hitbox.x += xDrawOffset / 2;
+		hitbox.x += (float) xDrawOffset / 2;
 	}
 
 	public void update() {

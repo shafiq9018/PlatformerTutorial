@@ -6,25 +6,32 @@ import utils.LoadSave;
 import static utils.Constants.PlayerConstants.*;
 
 public enum PlayerCharacter {
-
+    // NOTES: The cap letter A stands for amount. For example if you have a sheet with 3 dying pics you choose 3 for spriteA_DEAD etc.
+    //
     PIRATE(5, 6, 3, 1, 3, 4, 8,
             0, 1, 2, 3, 4, 5, 6,
-            LoadSave.PLAYER_PIRATE, 7, 8, 64, 40,
+            LoadSave.PLAYER_PIRATE, 0, 7, 8, 64, 40,
             20, 27, 21, 4),
     ORC(6, 8, 8, 8, 6, 4, 4,
             0, 1, 1, 1, 2, 4, 5,
-            LoadSave.PLAYER_ORC, 6, 8, 100, 100,
+            LoadSave.PLAYER_ORC, 0, 6, 8, 100, 100,
             13, 15, 44, 42),
     SOLDIER(6, 8, 8, 8, 6, 4, 4,
             0, 1, 1, 1, 2, 5, 6,
-            LoadSave.PLAYER_SOLDIER, 7, 8, 100, 100,
-            12, 18, 44, 39);
+            LoadSave.PLAYER_SOLDIER, 0, 7, 8, 100, 100,
+            12, 18, 44, 39),
+    EAGLE(11, 11, 11, 11, 1, 1, 1,
+                  1, 1, 1, 1, 1, 1, 1,
+          LoadSave.PLAYER_EAGLE, 0, 1, 11, 64, 95,
+                  12, 18, 21, 25);
 
-
+    // Instead of affecting the other characters we will equate RUNNING == FLYING for bird characters.
+    // As for the return value 7 for FLYING is debatable.
     public int spriteA_IDLE, spriteA_RUNNING, spriteA_JUMP, spriteA_FALLING, spriteA_ATTACK, spriteA_HIT, spriteA_DEAD;
     public int rowIDLE, rowRUNNING, rowJUMP, rowFALLING, rowATTACK, rowHIT, rowDEAD;
     public String playerAtlas;
-    public int rowA, colA;
+    public int centerPixelOffset;
+    public int numRows, numColms;
     public int spriteW, spriteH;
     public int hitboxW, hitboxH;
     public int xDrawOffset, yDrawOffset;
@@ -37,7 +44,7 @@ public enum PlayerCharacter {
 
     PlayerCharacter(int spriteA_IDLE, int spriteA_RUNNING, int spriteA_JUMP, int spriteA_FALLING, int spriteA_ATTACK, int spriteA_HIT, int spriteA_DEAD,
                     int rowIDLE, int rowRUNNING, int rowJUMP, int rowFALLING, int rowATTACK, int rowHIT, int rowDEAD,
-                    String playerAtlas, int rowA, int colA, int spriteW, int spriteH,
+                    String playerAtlas, int centerPixelOffset, int numbRows, int numbCols, int spriteW, int spriteH,
                     int hitboxW, int hitboxH,
                     int xDrawOffset, int yDrawOffset) {
 
@@ -58,8 +65,9 @@ public enum PlayerCharacter {
         this.rowDEAD = rowDEAD;
 
         this.playerAtlas = playerAtlas;
-        this.rowA = rowA;
-        this.colA = colA;
+        this.centerPixelOffset = centerPixelOffset; // This value corrects the char if it's loading to the side.
+        this.numRows = numbRows;
+        this.numColms = numbCols;
         this.spriteW = spriteW;
         this.spriteH = spriteH;
 

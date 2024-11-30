@@ -26,7 +26,9 @@ public class LoadSave {
     /// The videos above may contain old methods and classes. Please be careful.
     /// - Shafiq
     ///
-    public static final String PLAYER_ATLAS = "eagle_Linear_Sheet_Fixed.png";
+
+   // public static final String PLAYER_ATLAS = "eagle_Linear_Sheet_Fixed.png";
+    public static final String PLAYER_EAGLE = "eagle_Sheet_64pixel_Wide_Each_by_12.png"; // Using 64 pixel by 12 birds
     public static final String PLAYER_PIRATE = "player_sprites.png";
     public static final String PLAYER_ORC = "player_orc.png";
     public static final String PLAYER_SOLDIER = "player_soldier.png";
@@ -67,7 +69,7 @@ public class LoadSave {
 
     public static BufferedImage[][] loadAnimations(PlayerCharacter pc) {
         BufferedImage img = LoadSave.GetSpriteAtlas(pc.playerAtlas);
-        BufferedImage[][] animations = new BufferedImage[pc.rowA][pc.colA];
+        BufferedImage[][] animations = new BufferedImage[pc.numRows][pc.numColms];
         for (int j = 0; j < animations.length; j++)
             for (int i = 0; i < animations[j].length; i++)
                 animations[j][i] = img.getSubimage(i * pc.spriteW, j * pc.spriteH, pc.spriteW, pc.spriteH);
@@ -77,7 +79,7 @@ public class LoadSave {
     // Will add ability to choose different birds coming up next.
     //    public static BufferedImageNew[][] loadBirdAnimations(PlayerCharacter pc) {
     //        BufferedImage img = LoadSave.GetSpriteAtlas(pc.playerAtlas);
-    //        BufferedImage[][] animations = new BufferedImage[pc.rowA][pc.colA];
+    //        BufferedImage[][] animations = new BufferedImage[pc.numRows][pc.numColms];
     //        for (int j = 0; j < animations.length; j++)
     //            for (int i = 0; i < animations[j].length; i++)
     //                animations[j][i] = img.getSubimage(i * pc.spriteW, j * pc.spriteH, pc.spriteW, pc.spriteH);
