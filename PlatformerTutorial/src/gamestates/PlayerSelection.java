@@ -70,7 +70,6 @@ public class PlayerSelection extends State implements Statemethods {
 
         playButton.draw(g);
 
-
         //Center
         drawChar(g, playerIndex, menuX + menuWidth / 2, menuY + menuHeight / 2);
 
@@ -95,8 +94,6 @@ public class PlayerSelection extends State implements Statemethods {
 
         if (isIn(e, playButton))
             playButton.setMousePressed(true);
-
-
     }
 
     @Override
@@ -104,13 +101,10 @@ public class PlayerSelection extends State implements Statemethods {
 
         if (isIn(e, playButton)) {
             if (playButton.isMousePressed()) {
-
                 flappyGame.getPlaying().setPlayerCharacter(characterAnimations[playerIndex].getPc());
                 flappyGame.getAudioPlayer().setLevelSong(flappyGame.getPlaying().getLevelManager().getLevelIndex());
-
                 playButton.applyGamestate();
             }
-
         }
 
         resetButtons();
@@ -174,10 +168,10 @@ public class PlayerSelection extends State implements Statemethods {
 
         public void draw(Graphics g, int drawX, int drawY) {
             g.drawImage(animations[pc.getRowIndex(IDLE)][aniIndex],
-                    drawX - pc.spriteW * scale / 2,
-                    drawY - pc.spriteH * scale / 2,
-                    pc.spriteW * scale,
-                    pc.spriteH * scale,
+                    drawX - pc.spriteW * scale / 3,
+                    drawY - pc.spriteH * scale / 3,
+                    pc.spriteW * scale / 4,
+                    pc.spriteH * scale / 4,
                     null);
         }
 

@@ -321,6 +321,7 @@ public class Player extends Entity {
 
     private void updateAnimationTick() {
        // System.out.println("playerCharacter: " + playerCharacter);
+        System.out.println("sprite state sprite amount " + playerCharacter.getSpriteAmount(state));
         aniTick++;
         if (aniTick >= ANI_SPEED) {
             aniTick = 0;
