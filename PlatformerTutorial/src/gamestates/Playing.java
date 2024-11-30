@@ -367,6 +367,7 @@ public class Playing extends State implements Statemethods {
                 case KeyEvent.VK_ESCAPE:
                     paused = !paused;
             }
+        player.setRight(true); // I added this to set the forward motion of the bird.
     }
 
     @Override
@@ -383,6 +384,7 @@ public class Playing extends State implements Statemethods {
                     player.setJump(false);
                     break;
             }
+        player.setRight(true); // I added this to set the forward motion of the bird.
     }
 
     public void mouseDragged(MouseEvent e) {

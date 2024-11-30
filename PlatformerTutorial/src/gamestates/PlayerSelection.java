@@ -167,6 +167,7 @@ public class PlayerSelection extends State implements Statemethods {
         }
 
         public void draw(Graphics g, int drawX, int drawY) {
+            System.out.println("Drawing character animation x = " + drawX + " and y = " + drawY + " aniIndex = " + aniIndex);
             g.drawImage(animations[pc.getRowIndex(IDLE)][aniIndex],
                     drawX - pc.spriteW * scale / 3,
                     drawY - pc.spriteH * scale / 3,

@@ -161,7 +161,7 @@ public class ObjectManager {
 		return absValue <= FlappyGame.TILES_SIZE * 5;
 	}
 
-	private boolean isPlayerInfrontOfCannon(Cannon c, Player player) {
+	private boolean isPlayerInFrontOfCannon(Cannon c, Player player) {
 		if (c.getObjType() == CANNON_LEFT) {
 			if (c.getHitbox().x > player.getHitbox().x)
 				return true;
@@ -176,7 +176,7 @@ public class ObjectManager {
 			if (!c.doAnimation)
 				if (c.getTileY() == player.getTileY())
 					if (isPlayerInRange(c, player))
-						if (isPlayerInfrontOfCannon(c, player))
+						if (isPlayerInFrontOfCannon(c, player))
 							if (CanCannonSeePlayer(lvlData, player.getHitbox(), c.getHitbox(), c.getTileY()))
 								c.setAnimation(true);
 

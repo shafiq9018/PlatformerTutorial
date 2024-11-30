@@ -20,8 +20,8 @@ public class Player extends Entity {
     private boolean moving = false, attacking = false;
     private boolean left, right, jump;
     private int[][] lvlData;
-//    private float xDrawOffset = 21 * FlappyGame.SCALE;
-//    private float yDrawOffset = 4 * FlappyGame.SCALE;
+    //    private float xDrawOffset = 21 * FlappyGame.SCALE;
+    //    private float yDrawOffset = 4 * FlappyGame.SCALE;
 
     // Jumping / Gravity
     private float jumpSpeed = -2.25f * FlappyGame.SCALE;
@@ -68,7 +68,9 @@ public class Player extends Entity {
     private  boolean birdExited = true;
 
     public Player(PlayerCharacter playerCharacter, Playing playing) {
-        super(0, 0, (int) (playerCharacter.spriteW * FlappyGame.SCALE), (int) (playerCharacter.spriteH * FlappyGame.SCALE));
+        // The line super below seems to changing the EAGLE to left
+        // I need to run more tests.
+        super(0, 0, (int) ((playerCharacter.spriteW * FlappyGame.SCALE)) - playerCharacter.centerPixelOffset, (int) (playerCharacter.spriteH * FlappyGame.SCALE));
         this.playerCharacter = playerCharacter;
         this.playing = playing;
         this.state = IDLE;
@@ -128,6 +130,8 @@ public class Player extends Entity {
 //            }
 //    }
 
+    // I hard coded this since we do not have the original map for a different game.
+    // this only applies to the Flappy game.
     public void setSpawn(Point spawn) {
     //        this.x = spawn.x;
     //        this.y = spawn.y;
@@ -162,6 +166,8 @@ public class Player extends Entity {
     }
 
     private void initAttackBox() {
+
+        //        attackBox = new Rectangle2D.Float(x, y, (int) ((35 * FlappyGame.SCALE) + playerCharacter.centerPixelOffset), (int) (20 * FlappyGame.SCALE));
         attackBox = new Rectangle2D.Float(x, y, (int) (35 * FlappyGame.SCALE), (int) (20 * FlappyGame.SCALE));
         resetAttackBox();
     }
@@ -301,10 +307,11 @@ public class Player extends Entity {
 
     }
 
+    // Draws the health bar of the bird in the upper left corner.
     public void updateScore(int score,Graphics g ) {
         g.setColor(Color.white);
         g.setFont(new Font("Arial", Font.BOLD, 30));
-        g.drawString("Score: " + score, 50, 50);
+        g.drawString("Score: " + score, 50, 150);
     }
 
     // Draws the health bar of the bird in the upper left corner.
@@ -321,9 +328,9 @@ public class Player extends Entity {
 
     private void updateAnimationTick() {
        // System.out.println("playerCharacter: " + playerCharacter);
-        System.out.println("sprite state sprite amount " + playerCharacter.getSpriteAmount(state));
+       //  System.out.println("sprite state sprite amount " + playerCharacter.getSpriteAmount(state));
         aniTick++;
-        if (aniTick >= ANI_SPEED) {
+        if (aniTick >= ANI_SPEED) { // <---- This make no sense - Shafiq I will have to test why this is here.
             aniTick = 0;
             aniIndex++;
             if (aniIndex >= playerCharacter.getSpriteAmount(state)) {
@@ -383,7 +390,7 @@ public class Player extends Entity {
     }
 
     private void updatePos() {
-        moving = false;
+        moving = true; // Bird should never be false. Keeps moving.
 
         if (jump)
             jump();
@@ -396,14 +403,14 @@ public class Player extends Entity {
         float xSpeed = 0;
 
         if (left && !right) {
-            xSpeed -= walkSpeed;
-            flipX = width;
-            flipW = -1;
+            xSpeed += walkSpeed; // Changed the so bird is not able to go back wards.
+            // flipX = width;      // Changed the so bird is not able to go back wards.
+            // flipW = -1;         // Changed the so bird is not able to go back wards.
         }
         if (right && !left) {
             xSpeed += walkSpeed;
-            flipX = 0;
-            flipW = 1;
+            // flipX = 0; // Changed the so bird is not able to go back wards.
+            // flipW = 1;// Changed the so bird is not able to go back wards.
         }
 
         if (powerAttackActive) {
@@ -435,15 +442,15 @@ public class Player extends Entity {
                 updateXPos(xSpeed);
             }
 
-        } else
-            updateXPos(xSpeed);
+        } else                  // Removing this will cause the bird to speed up. Do not remove.
+              updateXPos(xSpeed);
         moving = true;
     }
 
     private void jump() {
-        if (inAir)
-            return;
-        playing.getGame().getAudioPlayer().playEffect(AudioPlayer.JUMP);
+        //        if (inAir)      // These are remarked out so bird is able to fly after space bar pressed.
+        //            return;
+        playing.getGame().getAudioPlayer().playEffect(AudioPlayer.JUMP);   // Change this flap sound when flying.
         inAir = true;
         airSpeed = jumpSpeed;
     }
@@ -453,10 +460,10 @@ public class Player extends Entity {
         airSpeed = 0;
     }
 
-    // Scorekeeper is updated here.
+    // Score tracker is updated here.
     private void updateXPos(float xSpeed) {
         if (CanMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
-            updateBirdScore(hitbox.x, hitbox.y, lvlData);
+            updateBirdScore(hitbox.x, hitbox.y, lvlData); // Update the score if the bird is able to cross into and out of tile 23. See Legends in folder.
             hitbox.x += xSpeed;
         }
         else {
