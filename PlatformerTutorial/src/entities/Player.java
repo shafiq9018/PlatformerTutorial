@@ -153,8 +153,8 @@ public class Player extends Entity {
     }
 
     public void update() {
-        // updateHealthBar();
-        // updatePowerBar();
+         updateHealthBar();
+         updatePowerBar();
 
         if (currentHealth <= 0) {
             if (state != DEAD) {
@@ -269,18 +269,18 @@ public class Player extends Entity {
         attackBox.y = hitbox.y + (FlappyGame.SCALE * 10);
     }
 
-//    private void updateHealthBar() {
-//        healthWidth = (int) ((currentHealth / (float) maxHealth) * healthBarWidth);
-//    }
-//
-//    private void updatePowerBar() {
-//        powerWidth = (int) ((powerValue / (float) powerMaxValue) * powerBarWidth);
-//        powerGrowTick++;
-//        if (powerGrowTick >= powerGrowSpeed) {
-//            powerGrowTick = 0;
-//            changePower(1);
-//        }
-//    }
+    private void updateHealthBar() {
+        healthWidth = (int) ((currentHealth / (float) maxHealth) * healthBarWidth);
+    }
+
+    private void updatePowerBar() {
+        powerWidth = (int) ((powerValue / (float) powerMaxValue) * powerBarWidth);
+        powerGrowTick++;
+        if (powerGrowTick >= powerGrowSpeed) {
+            powerGrowTick = 0;
+            changePower(1);
+        }
+    }
 
     public void render(Graphics g, int lvlOffset) {
         System.out.println("render lvlOffset" + lvlOffset);
