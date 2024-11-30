@@ -21,9 +21,9 @@ public enum PlayerCharacter {
             LoadSave.PLAYER_SOLDIER, 0, 7, 8, 100, 100,
             12, 18, 44, 39),
     EAGLE(11, 11, 11, 11, 1, 1, 1,
-                  1, 1, 1, 1, 1, 1, 1,
+                  0, 0, 0, 0, 0, 0, 0,
           LoadSave.PLAYER_EAGLE, 0, 1, 11, 64, 95,
-                  12, 18, 21, 25);
+                  25, 30, 21, 25);
 
     // Instead of affecting the other characters we will equate RUNNING == FLYING for bird characters.
     // As for the return value 7 for FLYING is debatable.

@@ -92,7 +92,7 @@ public class LevelCreateTool {
             g.dispose();
 
             // Save the generated image
-            File outputFile = new File("5.png");
+            File outputFile = new File("test.png");
             ImageIO.write(image, "png", outputFile);
 
             System.out.println("Image created " + outputFile);

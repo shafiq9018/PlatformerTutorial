@@ -204,14 +204,12 @@ public class Player extends Entity {
         }
 
         updateAttackBox();
-
         if (state == HIT) {
             if (aniIndex <= playerCharacter.getSpriteAmount(state) - 3)
                 pushBack(pushBackDir, lvlData, 1.25f);
             updatePushBackDrawOffset();
         } else
             updatePos();
-
         if (moving) {
             checkPotionTouched();
             checkSpikesTouched();
@@ -225,10 +223,8 @@ public class Player extends Entity {
                 }
             }
         }
-
         if (attacking || powerAttackActive)
             checkAttack();
-
         updateAnimationTick();
         setAnimation();
     }
@@ -297,8 +293,8 @@ public class Player extends Entity {
     }
 
     public void render(Graphics g, int lvlOffset) {
-        g.drawImage(animations[playerCharacter.getRowIndex(state)][aniIndex], (int) (hitbox.x - playerCharacter.xDrawOffset) - lvlOffset + flipX, (int) (hitbox.y - playerCharacter.yDrawOffset + (int) (pushDrawOffset)), width * flipW, height, null);
-        drawHitbox(g, lvlOffset);
+        g.drawImage(animations[playerCharacter.getRowIndex(state)][aniIndex], ((int) (hitbox.x - playerCharacter.xDrawOffset) - lvlOffset + flipX), (int) (hitbox.y - playerCharacter.yDrawOffset + (int) (pushDrawOffset)), width * flipW, height, null);
+        drawHitbox(g, lvlOffset); //
         // drawAttackBox(g, lvlOffset); This is for if we need to set an attack area for the bird. Not used.
         drawUI(g);
         updateScore(birdScore, g);
@@ -311,20 +307,20 @@ public class Player extends Entity {
         g.drawString("Score: " + score, 50, 50);
     }
 
+    // Draws the health bar of the bird in the upper left corner.
     private void drawUI(Graphics g) {
         // Background ui
         g.drawImage(statusBarImg, statusBarX, statusBarY, statusBarWidth, statusBarHeight, null);
-
         // Health bar
         g.setColor(Color.red);
         g.fillRect(healthBarXStart + statusBarX, healthBarYStart + statusBarY, healthWidth, healthBarHeight);
-
         // Power Bar
         g.setColor(Color.yellow);
         g.fillRect(powerBarXStart + statusBarX, powerBarYStart + statusBarY, powerWidth, powerBarHeight);
     }
 
     private void updateAnimationTick() {
+       // System.out.println("playerCharacter: " + playerCharacter);
         aniTick++;
         if (aniTick >= ANI_SPEED) {
             aniTick = 0;
