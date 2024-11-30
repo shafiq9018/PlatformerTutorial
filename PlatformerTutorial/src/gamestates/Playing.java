@@ -80,16 +80,19 @@ public class Playing extends State implements Statemethods {
         initClasses();
 
         backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.PLAYING_BG_IMG);
+
         bigCloud = LoadSave.GetSpriteAtlas(LoadSave.BIG_CLOUDS);
+
         smallCloud = LoadSave.GetSpriteAtlas(LoadSave.SMALL_CLOUDS);
+
         smallCloudsPos = new int[8];
         for (int i = 0; i < smallCloudsPos.length; i++)
             smallCloudsPos[i] = (int) (90 * FlappyGame.SCALE) + rnd.nextInt((int) (100 * FlappyGame.SCALE));
 
-        shipImgs = new BufferedImage[4];
-        BufferedImage temp = LoadSave.GetSpriteAtlas(LoadSave.SHIP);
-        for (int i = 0; i < shipImgs.length; i++)
-            shipImgs[i] = temp.getSubimage(i * 78, 0, 78, 72);
+//        shipImgs = new BufferedImage[4];
+//        BufferedImage temp = LoadSave.GetSpriteAtlas(LoadSave.SHIP);
+//        for (int i = 0; i < shipImgs.length; i++)
+//            shipImgs[i] = temp.getSubimage(i * 78, 0, 78, 72);
 
        // loadDialogue();
         calcLvlOffset();
@@ -316,8 +319,11 @@ public class Playing extends State implements Statemethods {
 
     private void setDrawRainBoolean() {
         // This method makes it rain 20% of the time you load a level.
-        if (rnd.nextFloat() >= 0.8f)
+        if (rnd.nextFloat() >= 0.8f) {
             drawRain = true;
+        }
+        drawRain = false;
+
     }
 
     public void setGameOver(boolean gameOver) {

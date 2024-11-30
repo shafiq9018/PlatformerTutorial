@@ -302,7 +302,7 @@ public class Player extends Entity {
         g.drawImage(animations[playerCharacter.getRowIndex(state)][aniIndex], ((int) (hitbox.x - playerCharacter.xDrawOffset) - lvlOffset + flipX), (int) (hitbox.y - playerCharacter.yDrawOffset + (int) (pushDrawOffset)), width * flipW, height, null);
         drawHitbox(g, lvlOffset); //
         // drawAttackBox(g, lvlOffset); This is for if we need to set an attack area for the bird. Not used.
-        drawUI(g);
+       // drawUI(g);
         updateScore(birdScore, g);
 
     }
@@ -349,6 +349,7 @@ public class Player extends Entity {
 
     private void setAnimation() {
         int startAni = state;
+        // System.out.println("---->  startAni: " + startAni);
 
         if (state == HIT)
             return;
@@ -380,8 +381,9 @@ public class Player extends Entity {
                 return;
             }
         }
-        if (startAni != state)
-            resetAniTick();
+        if (startAni != state) {
+            // resetAniTick();
+        }
     }
 
     private void resetAniTick() {
@@ -509,11 +511,11 @@ public class Player extends Entity {
         powerValue = Math.max(Math.min(powerValue, powerMaxValue), 0);
     }
 
-
+    // Set this value to false to pause bird when game starts.
     public void loadLvlData(int[][] lvlData) {
         this.lvlData = lvlData;
         if (!IsEntityOnFloor(hitbox, lvlData))
-            inAir = true;
+            inAir = false;
     }
 
     public void resetDirBooleans() {
