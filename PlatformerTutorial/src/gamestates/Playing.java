@@ -153,6 +153,7 @@ public class Playing extends State implements Statemethods {
 
     private void calcLvlOffset() {
         maxLvlOffsetX = levelManager.getCurrentLevel().getLvlOffset();
+
         System.out.println("maxLvlOffsetX: " + maxLvlOffsetX);
     }
 
