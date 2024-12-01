@@ -24,7 +24,7 @@ public class ScrollingForeground extends JPanel implements ActionListener {
     public ScrollingForeground() {
         // Load the image
         try {
-            foreground = ImageIO.read(new File("res/scene_chatGPT.png")); // Ensure correct file path
+            foreground = ImageIO.read(new File("scene_chatGPT.png")); // Ensure correct file path
             foreground = foreground.getScaledInstance(WIDTH * 2, HEIGHT, Image.SCALE_SMOOTH);
         } catch (IOException e) {
             System.err.println("Image not found: " + e.getMessage());
@@ -32,7 +32,7 @@ public class ScrollingForeground extends JPanel implements ActionListener {
         }
 
         // Start animation timer
-        timer = new Timer(16, this); // ~60 FPS
+        timer = new Timer(6, this); // ~60 FPS
         timer.start();
     }
 

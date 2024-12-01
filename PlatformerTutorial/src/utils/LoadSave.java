@@ -41,6 +41,18 @@ public class LoadSave {
     public static final String VOLUME_BUTTONS = "volume_buttons.png";
     public static final String MENU_BACKGROUND_IMG = "bk_images/halloween2.png";
     public static final String PLAYING_BG_IMG = "playing_bg_img.png";
+    // Halloween theme backgrounds
+    public static final String Folder = "HalloweenThemes/";
+    public static final String FlappyLayer_1 = Folder + "Layer_1.png";  // This is the background downloaded from free sites.
+    public static final String FlappyLayer_2 = Folder + "Layer_2.png";  // This is the background downloaded from free sites.
+    public static final String FlappyLayer_3 = Folder + "Layer_3.png";  // This is the background downloaded from free sites.
+
+    // Halloween theme backgrounds
+    public static final String Folder2 = "Christmas/";
+    public static final String FlappyLayer_cm1 = Folder + "Layer_1.png";  // This is the background downloaded from free sites.
+    public static final String FlappyLayer_cm2 = Folder + "Layer_2.png";  // This is the background downloaded from free sites.
+    public static final String FlappyLayer_cm3 = Folder + "Layer_3.png";  // This is the background downloaded from free sites.
+
     public static final String BIG_CLOUDS = "big_clouds.png";
     public static final String SMALL_CLOUDS = "small_clouds.png";
     public static final String CRABBY_SPRITE = "crabby_sprite.png";
@@ -86,9 +98,10 @@ public class LoadSave {
     //        return animations;
     //    }
 
+    // Load birds
 
     public static BufferedImage GetSpriteAtlas(String fileName) {
-        System.out.println("////////////////// fileName: " + fileName);
+        // System.out.println("LoadSave.java fileName: " + fileName);
         BufferedImage img = null;
         InputStream is = LoadSave.class.getResourceAsStream("/" + fileName);
         try {

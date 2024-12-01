@@ -43,13 +43,24 @@ public class Playing extends State implements Statemethods {
     private boolean paused = false;
 
     private int xLvlOffset;
-    private int leftBorder = (int) (0.25 * FlappyGame.GAME_WIDTH);
-    private int rightBorder = (int) (0.75 * FlappyGame.GAME_WIDTH);
+
+    private int leftBorder = (int) (0.2 * FlappyGame.GAME_WIDTH);
+    private int rightBorder = (int) (0.8 * FlappyGame.GAME_WIDTH);
     private int maxLvlOffsetX;
 
     private BufferedImage backgroundImg, bigCloud, smallCloud, shipImgs[];
     private BufferedImage[] questionImgs, exclamationImgs;
     private ArrayList<DialogueEffect> dialogEffects = new ArrayList<>();
+
+    // Flappy bird
+    private BufferedImage flappyBKGLayer1, flappyBKGLayer2, flappyBKGLayer3;
+    private int backgroundImgWidth = FlappyGame.GAME_WIDTH;
+
+    private float backgroundImgSpeed = .07f;
+    private float backLayer1Speed = 0.06f;
+    private float backLayer2Speed = 0.08f;
+    private int backgroundImgCounter = 0;
+
 
     private int[] smallCloudsPos;
     private Random rnd = new Random();
@@ -81,20 +92,18 @@ public class Playing extends State implements Statemethods {
 
         backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.PLAYING_BG_IMG);
 
-        bigCloud = LoadSave.GetSpriteAtlas(LoadSave.BIG_CLOUDS);
+        //        bigCloud = LoadSave.GetSpriteAtlas(LoadSave.BIG_CLOUDS);
+        //        smallCloud = LoadSave.GetSpriteAtlas(LoadSave.SMALL_CLOUDS);
+        //        smallCloudsPos = new int[8];
+        //        for (int i = 0; i < smallCloudsPos.length; i++)
+        //            smallCloudsPos[i] = (int) (90 * FlappyGame.SCALE) + rnd.nextInt((int) (100 * FlappyGame.SCALE));
 
-        smallCloud = LoadSave.GetSpriteAtlas(LoadSave.SMALL_CLOUDS);
+        //        shipImgs = new BufferedImage[4];
+        //        BufferedImage temp = LoadSave.GetSpriteAtlas(LoadSave.SHIP);
+        //        for (int i = 0; i < shipImgs.length; i++)
+        //            shipImgs[i] = temp.getSubimage(i * 78, 0, 78, 72);
+        // loadDialogue();
 
-        smallCloudsPos = new int[8];
-        for (int i = 0; i < smallCloudsPos.length; i++)
-            smallCloudsPos[i] = (int) (90 * FlappyGame.SCALE) + rnd.nextInt((int) (100 * FlappyGame.SCALE));
-
-//        shipImgs = new BufferedImage[4];
-//        BufferedImage temp = LoadSave.GetSpriteAtlas(LoadSave.SHIP);
-//        for (int i = 0; i < shipImgs.length; i++)
-//            shipImgs[i] = temp.getSubimage(i * 78, 0, 78, 72);
-
-       // loadDialogue();
         calcLvlOffset();
         loadStartLevel();
         setDrawRainBoolean();
@@ -253,8 +262,9 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void draw(Graphics g) {
+        System.out.println("xLvlOffset: " + xLvlOffset / 3);
         g.drawImage(backgroundImg, 0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
-        drawClouds(g);
+        // drawClouds(g);
         setDrawRainBoolean(); // Make it rain 25% of the time.
 
         if (drawRain)
@@ -264,11 +274,15 @@ public class Playing extends State implements Statemethods {
             g.drawImage(shipImgs[shipAni], (int) (100 * FlappyGame.SCALE) - xLvlOffset, (int) ((288 * FlappyGame.SCALE) + shipHeightDelta), (int) (78 * FlappyGame.SCALE), (int) (72 * FlappyGame.SCALE), null);
 
         levelManager.draw(g, xLvlOffset);
-        objectManager.draw(g, xLvlOffset);
-        enemyManager.draw(g, xLvlOffset);
+
+        // objectManager.draw(g, xLvlOffset);
+        // enemyManager.draw(g, xLvlOffset);
+
         player.render(g, xLvlOffset);
-        objectManager.drawBackgroundTrees(g, xLvlOffset);
-       // drawDialogue(g, xLvlOffset);
+
+        // objectManager.drawBackgroundTrees(g, xLvlOffset);
+
+        // drawDialogue(g, xLvlOffset);
 
         if (paused) {
             g.setColor(new Color(0, 0, 0, 150));
@@ -283,13 +297,13 @@ public class Playing extends State implements Statemethods {
 
     }
 
-    private void drawClouds(Graphics g) {
-        for (int i = 0; i < 4; i++)
-            g.drawImage(bigCloud, i * BIG_CLOUD_WIDTH - (int) (xLvlOffset * 0.3), (int) (204 * FlappyGame.SCALE), BIG_CLOUD_WIDTH, BIG_CLOUD_HEIGHT, null);
-
-        for (int i = 0; i < smallCloudsPos.length; i++)
-            g.drawImage(smallCloud, SMALL_CLOUD_WIDTH * 4 * i - (int) (xLvlOffset * 0.7), smallCloudsPos[i], SMALL_CLOUD_WIDTH, SMALL_CLOUD_HEIGHT, null);
-    }
+    //    private void drawClouds(Graphics g) {
+    //        for (int i = 0; i < 4; i++)
+    //            g.drawImage(bigCloud, i * BIG_CLOUD_WIDTH - (int) (xLvlOffset * 0.3), (int) (204 * FlappyGame.SCALE), BIG_CLOUD_WIDTH, BIG_CLOUD_HEIGHT, null);
+    //
+    //        for (int i = 0; i < smallCloudsPos.length; i++)
+    //            g.drawImage(smallCloud, SMALL_CLOUD_WIDTH * 4 * i - (int) (xLvlOffset * 0.7), smallCloudsPos[i], SMALL_CLOUD_WIDTH, SMALL_CLOUD_HEIGHT, null);
+    //    }
 
     public void setGameCompleted() {
         gameCompleted = true;
@@ -314,6 +328,7 @@ public class Playing extends State implements Statemethods {
         dialogEffects.clear();
     }
 
+    // Make it snow or rain.
     private void setDrawRainBoolean() {
         // This method makes it rain 20% of the time you load a level.
         if (rnd.nextFloat() >= 0.8f) {
