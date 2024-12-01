@@ -83,7 +83,7 @@ public class PlayerSelection extends State implements Statemethods {
 
     private void drawChar(Graphics g, int playerIndex, int x, int y) {
         if (playerIndex < 0)
-            playerIndex = characterAnimations.length - 1;
+            playerIndex = characterAnimations.length - 1; // Count goes from 0 to X to -1 to get char count.
         else if (playerIndex >= characterAnimations.length)
             playerIndex = 0;
         characterAnimations[playerIndex].draw(g, x, y);
@@ -167,7 +167,7 @@ public class PlayerSelection extends State implements Statemethods {
         }
 
         public void draw(Graphics g, int drawX, int drawY) {
-            System.out.println("Drawing character animation x = " + drawX + " and y = " + drawY + " aniIndex = " + aniIndex);
+            // System.out.println("Drawing character animation x = " + drawX + " and y = " + drawY + " aniIndex = " + aniIndex);
             g.drawImage(animations[pc.getRowIndex(IDLE)][aniIndex],
                     drawX - pc.spriteW * scale / 3,
                     drawY - pc.spriteH * scale / 3,

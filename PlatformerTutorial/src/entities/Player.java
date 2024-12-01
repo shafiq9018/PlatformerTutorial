@@ -57,6 +57,8 @@ public class Player extends Entity {
 
     private int tileY = 0;
 
+    // private int birdStartHeight =
+
     private boolean powerAttackActive;
     private int powerAttackTick;
     private int powerGrowSpeed = 15;
@@ -135,8 +137,9 @@ public class Player extends Entity {
     public void setSpawn(Point spawn) {
     //        this.x = spawn.x;
     //        this.y = spawn.y;
+
         this.x = 33;
-        this.y = 33;
+        this.y = (int)(FlappyGame.GAME_HEIGHT/ 2);
         hitbox.x = x;
         hitbox.y = y;
     }
@@ -302,8 +305,8 @@ public class Player extends Entity {
         g.drawImage(animations[playerCharacter.getRowIndex(state)][aniIndex], ((int) (hitbox.x - playerCharacter.xDrawOffset) - lvlOffset + flipX), (int) (hitbox.y - playerCharacter.yDrawOffset + (int) (pushDrawOffset)), width * flipW, height, null);
         drawHitbox(g, lvlOffset); //
         // drawAttackBox(g, lvlOffset); This is for if we need to set an attack area for the bird. Not used.
-       // drawUI(g);
-        updateScore(birdScore, g);
+        drawUI(g);
+        updateScore(birdScore, g); // every player re-draw check if scored.
 
     }
 
@@ -348,6 +351,7 @@ public class Player extends Entity {
     }
 
     private void setAnimation() {
+
         int startAni = state;
         // System.out.println("---->  startAni: " + startAni);
 

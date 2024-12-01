@@ -22,7 +22,7 @@ public enum PlayerCharacter {
             12, 18, 44, 39),
     EAGLE(11, 11, 11, 11, 1, 1, 1,
                   0, 0, 0, 0, 0, 0, 0,
-          LoadSave.PLAYER_EAGLE, 15, 1, 11, 72, 70,
+          LoadSave.PLAYER_EAGLE, 10, 1, 11, 72, 70,
                   40, 30, 21, 25);
 
     // Instead of affecting the other characters we will equate RUNNING == FLYING for bird characters.

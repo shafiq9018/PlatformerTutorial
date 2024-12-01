@@ -39,7 +39,7 @@ public class LoadSave {
     public static final String SOUND_BUTTONS = "sound_button.png";
     public static final String URM_BUTTONS = "urm_buttons.png";
     public static final String VOLUME_BUTTONS = "volume_buttons.png";
-    public static final String MENU_BACKGROUND_IMG = "background_menu.png";
+    public static final String MENU_BACKGROUND_IMG = "bk_images/halloween2.png";
     public static final String PLAYING_BG_IMG = "playing_bg_img.png";
     public static final String BIG_CLOUDS = "big_clouds.png";
     public static final String SMALL_CLOUDS = "small_clouds.png";
@@ -72,7 +72,7 @@ public class LoadSave {
         BufferedImage[][] animations = new BufferedImage[pc.numRows][pc.numColms];
         for (int j = 0; j < animations.length; j++)
             for (int i = 0; i < animations[j].length; i++)
-                animations[j][i] = img.getSubimage(i * pc.spriteW, j * pc.spriteH, pc.spriteW, pc.spriteH);
+                animations[j][i] = img.getSubimage((i * pc.spriteW) + pc.centerPixelOffset, j * pc.spriteH, pc.spriteW, pc.spriteH);
         return animations;
     }
 

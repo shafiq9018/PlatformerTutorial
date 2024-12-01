@@ -103,7 +103,7 @@ public class Playing extends State implements Statemethods {
     private void loadDialogue() {
         loadDialogueImgs();
 
-        // Load dialogue array with premade objects, that gets activated when needed.
+        // Load dialogue array with pre-made objects, that gets activated when needed.
         // This is a simple
         // way of avoiding ConcurrentModificationException error. (Adding to a list that
         // is being looped through.
@@ -144,6 +144,7 @@ public class Playing extends State implements Statemethods {
 
     private void calcLvlOffset() {
         maxLvlOffsetX = levelManager.getCurrentLevel().getLvlOffset();
+        System.out.println("maxLvlOffsetX: " + maxLvlOffsetX);
     }
 
     private void initClasses() {
@@ -241,7 +242,6 @@ public class Playing extends State implements Statemethods {
     private void checkCloseToBorder() {
         int playerX = (int) player.getHitbox().x;
         int diff = playerX - xLvlOffset;
-
         if (diff > rightBorder) {
             xLvlOffset += diff - rightBorder;
         }
@@ -253,11 +253,8 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void draw(Graphics g) {
-
         g.drawImage(backgroundImg, 0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
-
         drawClouds(g);
-
         setDrawRainBoolean(); // Make it rain 25% of the time.
 
         if (drawRain)
@@ -361,7 +358,7 @@ public class Playing extends State implements Statemethods {
         if (!gameOver && !gameCompleted && !lvlCompleted)
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_A:
-                    player.setLeft(true);
+                    player.setLeft(false); // avoid bird pausing when A key pressed .
                     break;
                 case KeyEvent.VK_D:
 
@@ -435,6 +432,8 @@ public class Playing extends State implements Statemethods {
         else if (gameCompleted)
             gameCompletedOverlay.mouseMoved(e);
     }
+
+    // Set level compelted when bird reaches the end.
 
     public void setLevelCompleted(boolean levelCompleted) {
         flappyGame.getAudioPlayer().lvlCompleted();

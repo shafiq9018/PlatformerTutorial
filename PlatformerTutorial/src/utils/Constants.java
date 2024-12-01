@@ -16,8 +16,8 @@ public class Constants {
 
 		public static int GetSpriteAmount(int type) {
 			switch (type) {
-			case QUESTION, EXCLAMATION:
-				return 5;
+				case QUESTION, EXCLAMATION:
+					return 5;
 			}
 			return 0;
 		}
@@ -70,24 +70,24 @@ public class Constants {
 
 		public static int GetSpriteAmount(int object_type) {
 			switch (object_type) {
-			case RED_POTION, BLUE_POTION:
-				return 7;
-			case BARREL, BOX:
-				return 8;
-			case CANNON_LEFT, CANNON_RIGHT:
-				return 7;
+				case RED_POTION, BLUE_POTION:
+					return 7;
+				case BARREL, BOX:
+					return 8;
+				case CANNON_LEFT, CANNON_RIGHT:
+					return 7;
 			}
 			return 1;
 		}
 
 		public static int GetTreeOffsetX(int treeType) {
 			switch (treeType) {
-			case TREE_ONE:
-				return (FlappyGame.TILES_SIZE / 2) - (GetTreeWidth(treeType) / 2);
-			case TREE_TWO:
-				return (int) (FlappyGame.TILES_SIZE / 2.5f);
-			case TREE_THREE:
-				return (int) (FlappyGame.TILES_SIZE / 1.65f);
+				case TREE_ONE:
+					return (FlappyGame.TILES_SIZE / 2) - (GetTreeWidth(treeType) / 2);
+				case TREE_TWO:
+					return (int) (FlappyGame.TILES_SIZE / 2.5f);
+				case TREE_THREE:
+					return (int) (FlappyGame.TILES_SIZE / 1.65f);
 			}
 
 			return 0;
@@ -96,10 +96,10 @@ public class Constants {
 		public static int GetTreeOffsetY(int treeType) {
 
 			switch (treeType) {
-			case TREE_ONE:
-				return -GetTreeHeight(treeType) + FlappyGame.TILES_SIZE * 2;
-			case TREE_TWO, TREE_THREE:
-				return -GetTreeHeight(treeType) + (int) (FlappyGame.TILES_SIZE / 1.25f);
+				case TREE_ONE:
+					return -GetTreeHeight(treeType) + FlappyGame.TILES_SIZE * 2;
+				case TREE_TWO, TREE_THREE:
+					return -GetTreeHeight(treeType) + (int) (FlappyGame.TILES_SIZE / 1.25f);
 			}
 			return 0;
 
@@ -107,12 +107,12 @@ public class Constants {
 
 		public static int GetTreeWidth(int treeType) {
 			switch (treeType) {
-			case TREE_ONE:
-				return (int) (39 * FlappyGame.SCALE);
-			case TREE_TWO:
-				return (int) (62 * FlappyGame.SCALE);
-			case TREE_THREE:
-				return -(int) (62 * FlappyGame.SCALE);
+				case TREE_ONE:
+					return (int) (39 * FlappyGame.SCALE);
+				case TREE_TWO:
+					return (int) (62 * FlappyGame.SCALE);
+				case TREE_THREE:
+					return -(int) (62 * FlappyGame.SCALE);
 
 			}
 			return 0;
@@ -120,10 +120,10 @@ public class Constants {
 
 		public static int GetTreeHeight(int treeType) {
 			switch (treeType) {
-			case TREE_ONE:
-				return (int) (int) (92 * FlappyGame.SCALE);
-			case TREE_TWO, TREE_THREE:
-				return (int) (54 * FlappyGame.SCALE);
+				case TREE_ONE:
+					return (int) (int) (92 * FlappyGame.SCALE);
+				case TREE_TWO, TREE_THREE:
+					return (int) (54 * FlappyGame.SCALE);
 			}
 			return 0;
 		}
@@ -164,47 +164,47 @@ public class Constants {
 		public static int GetSpriteAmount(int enemy_type, int enemy_state) {
 			switch (enemy_state) {
 
-			case IDLE: {
-				if (enemy_type == CRABBY)
-					return 9;
-				else if (enemy_type == PINKSTAR || enemy_type == SHARK)
-					return 8;
-			}
-			case RUNNING:
-				return 6;
-			case ATTACK:
-				if (enemy_type == SHARK)
-					return 8;
-				return 7;
-			case HIT:
-				return 4;
-			case DEAD:
-				return 5;
+				case IDLE: {
+					if (enemy_type == CRABBY)
+						return 9;
+					else if (enemy_type == PINKSTAR || enemy_type == SHARK)
+						return 8;
+				}
+				case RUNNING:
+					return 6;
+				case ATTACK:
+					if (enemy_type == SHARK)
+						return 8;
+					return 7;
+				case HIT:
+					return 4;
+				case DEAD:
+					return 5;
 			}
 			return 0;
 		}
 
 		public static int GetMaxHealth(int enemy_type) {
 			switch (enemy_type) {
-			case CRABBY:
-				return 50;
-			case PINKSTAR, SHARK:
-				return 25;
-			default:
-				return 1;
+				case CRABBY:
+					return 50;
+				case PINKSTAR, SHARK:
+					return 25;
+				default:
+					return 1;
 			}
 		}
 
 		public static int GetEnemyDmg(int enemy_type) {
 			switch (enemy_type) {
-			case CRABBY:
-				return 15;
-			case PINKSTAR:
-				return 20;
-			case SHARK:
-				return 25;
-			default:
-				return 0;
+				case CRABBY:
+					return 15;
+				case PINKSTAR:
+					return 20;
+				case SHARK:
+					return 25;
+				default:
+					return 0;
 			}
 		}
 	}
@@ -267,24 +267,5 @@ public class Constants {
 		public static final int HIT = 5;
 		public static final int DEAD = 6;
 
-//		public static int GetSpriteAmount(int player_action) {
-//			switch (player_action) {
-//			case DEAD:
-//				return 8;
-//			case RUNNING:
-//				return 6;
-//			case IDLE:
-//				return 5;
-//			case HIT:
-//				return 4;
-//			case JUMP:
-//			case ATTACK:
-//				return 3;
-//			case FALLING:
-//			default:
-//				return 1;
-//			}
-//		}
 	}
-
 }

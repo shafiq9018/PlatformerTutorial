@@ -12,14 +12,14 @@ import utils.LoadSave;
 public class Menu extends State implements Statemethods {
 
     private MenuButton[] buttons = new MenuButton[4];
-    private BufferedImage backgroundImg, backgroundImgPink;
+    private BufferedImage backgroundImg, backgroundImgFlappyBird;
     private int menuX, menuY, menuWidth, menuHeight;
 
     public Menu(FlappyGame flappyGame) {
         super(flappyGame);
         loadButtons();
         loadBackground();
-        backgroundImgPink = LoadSave.GetSpriteAtlas(LoadSave.MENU_BACKGROUND_IMG);
+        backgroundImgFlappyBird = LoadSave.GetSpriteAtlas(LoadSave.MENU_BACKGROUND_IMG);
 
     }
 
@@ -46,7 +46,7 @@ public class Menu extends State implements Statemethods {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(backgroundImgPink, 0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
+        g.drawImage(backgroundImgFlappyBird, 0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
         g.drawImage(backgroundImg, menuX, menuY, menuWidth, menuHeight, null);
 
         for (MenuButton mb : buttons)
