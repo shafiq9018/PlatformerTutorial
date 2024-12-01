@@ -45,7 +45,7 @@ public class Playing extends State implements Statemethods {
     private int xLvlOffset;
 
     private int leftBorder = (int) (0.2 * FlappyGame.GAME_WIDTH);
-    private int rightBorder = (int) (0.8 * FlappyGame.GAME_WIDTH);
+    private int rightBorder = (int) ((FlappyGame.GAME_WIDTH) / 2); // This determines the how far the bird travels to the right.
     private int maxLvlOffsetX;
 
     private BufferedImage backgroundImg, bigCloud, smallCloud, shipImgs[];
@@ -153,8 +153,6 @@ public class Playing extends State implements Statemethods {
 
     private void calcLvlOffset() {
         maxLvlOffsetX = levelManager.getCurrentLevel().getLvlOffset();
-
-        System.out.println("maxLvlOffsetX: " + maxLvlOffsetX);
     }
 
     private void initClasses() {
@@ -196,8 +194,8 @@ public class Playing extends State implements Statemethods {
             levelManager.update();
             objectManager.update(levelManager.getCurrentLevel().getLevelData(), player);
             player.update();
-            enemyManager.update(levelManager.getCurrentLevel().getLevelData());
             checkCloseToBorder();
+            enemyManager.update(levelManager.getCurrentLevel().getLevelData());
             if (drawShip)
                 updateShipAni();
         }
@@ -250,6 +248,7 @@ public class Playing extends State implements Statemethods {
     }
 
     private void checkCloseToBorder() {
+        System.out.println("xLvlOffset: " + xLvlOffset);
         int playerX = (int) player.getHitbox().x;
         int diff = playerX - xLvlOffset;
         if (diff > rightBorder) {
@@ -257,13 +256,17 @@ public class Playing extends State implements Statemethods {
         }
         else if (diff < leftBorder)
             xLvlOffset += diff - leftBorder;
-
-        xLvlOffset = Math.max(Math.min(xLvlOffset, maxLvlOffsetX), 0);
+        if (xLvlOffset > maxLvlOffsetX) {
+            xLvlOffset = maxLvlOffsetX;
+            System.out.println("entered maxLvlOffsetX :" + maxLvlOffsetX);
+        } else if (xLvlOffset < 0) {
+            xLvlOffset = 0;
+            //  xLvlOffset = Math.max(Math.min(xLvlOffset, maxLvlOffsetX), 0);
+        }
     }
 
     @Override
     public void draw(Graphics g) {
-        System.out.println("xLvlOffset: " + xLvlOffset / 3);
         g.drawImage(backgroundImg, 0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
         // drawClouds(g);
         setDrawRainBoolean(); // Make it rain 25% of the time.
@@ -271,8 +274,8 @@ public class Playing extends State implements Statemethods {
         if (drawRain)
             rain.draw(g, xLvlOffset);
 
-        if (drawShip)
-            g.drawImage(shipImgs[shipAni], (int) (100 * FlappyGame.SCALE) - xLvlOffset, (int) ((288 * FlappyGame.SCALE) + shipHeightDelta), (int) (78 * FlappyGame.SCALE), (int) (72 * FlappyGame.SCALE), null);
+        //        if (drawShip)
+        //            g.drawImage(shipImgs[shipAni], (int) (100 * FlappyGame.SCALE) - xLvlOffset, (int) ((288 * FlappyGame.SCALE) + shipHeightDelta), (int) (78 * FlappyGame.SCALE), (int) (72 * FlappyGame.SCALE), null);
 
         levelManager.draw(g, xLvlOffset);
 

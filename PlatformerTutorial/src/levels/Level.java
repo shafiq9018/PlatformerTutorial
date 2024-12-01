@@ -74,7 +74,6 @@ public class Level {
 		switch (redValue) {
             case 0, 1, 2, 3, 30, 31, 33, 34, 35, 36, 37, 38, 39 -> {
                 // grass.add(new Grass((int) (x * FlappyGame.TILES_SIZE), (int) (y * FlappyGame.TILES_SIZE) - FlappyGame.TILES_SIZE, getRndGrassType(x)));
-
             }
         }
 	}
@@ -101,10 +100,10 @@ public class Level {
 
 	private void loadObjects(int blueValue, int x, int y) {
 		switch (blueValue) {
-//		case RED_POTION, BLUE_POTION -> potions.add(new Potion(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE, blueValue));
-//		case BOX, BARREL -> containers.add(new GameContainer(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE, blueValue));
-//		case SPIKE -> spikes.add(new Spike(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE, SPIKE));
-//		case CANNON_LEFT, CANNON_RIGHT -> cannons.add(new Cannon(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE, blueValue));
+		//		case RED_POTION, BLUE_POTION -> potions.add(new Potion(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE, blueValue));
+		//		case BOX, BARREL -> containers.add(new GameContainer(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE, blueValue));
+		//		case SPIKE -> spikes.add(new Spike(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE, SPIKE));
+		//		case CANNON_LEFT, CANNON_RIGHT -> cannons.add(new Cannon(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE, blueValue));
 		// case TREE_ONE, TREE_TWO, TREE_THREE -> trees.add(new BackgroundTree(x * FlappyGame.TILES_SIZE, y * FlappyGame.TILES_SIZE, blueValue));
 		}
 	}
@@ -113,6 +112,7 @@ public class Level {
 		lvlTilesWide = img.getWidth();
 		maxTilesOffset = lvlTilesWide - FlappyGame.TILES_IN_WIDTH;
 		maxLvlOffsetX = FlappyGame.TILES_SIZE * maxTilesOffset;
+		// System.out.println("maxLvlOffsetX: read from inside Level.java" + maxLvlOffsetX);
 	}
 
 	public int getSpriteIndex(int x, int y) {
