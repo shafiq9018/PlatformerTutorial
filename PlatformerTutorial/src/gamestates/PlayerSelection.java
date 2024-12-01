@@ -36,10 +36,10 @@ public class PlayerSelection extends State implements Statemethods {
     private void loadCharAnimations() {
         characterAnimations = new CharacterAnimation[4];
         int i = 0;
-        characterAnimations[i++] = new CharacterAnimation(PlayerCharacter.BAT);
-        characterAnimations[i++] = new CharacterAnimation(PlayerCharacter.ORC);
-        characterAnimations[i++] = new CharacterAnimation(PlayerCharacter.SOLDIER);
         characterAnimations[i++] = new CharacterAnimation(PlayerCharacter.EAGLE);
+        characterAnimations[i++] = new CharacterAnimation(PlayerCharacter.BAT);
+        characterAnimations[i++] = new CharacterAnimation(PlayerCharacter.YELLOWBIRD);
+        characterAnimations[i++] = new CharacterAnimation(PlayerCharacter.REDBIRD);
     }
 
     private void loadBackground() {

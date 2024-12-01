@@ -16,10 +16,10 @@ public class CenterSpriteTool extends JPanel implements KeyListener {
 //    private static final int SPRITE_HEIGHT = 195; // Height of each sprite
     // Adjust the SPRITE_WIDTH until the bird stops scrolling and is still.
     // Then press D to add the offset.
-    private static final int SPRITE_WIDTH = 61;  // Width of each sprite
-    private static final int SPRITE_HEIGHT = 96; // Height of each sprite
+    private static final int SPRITE_WIDTH = 58;  // Width of each sprite
+    private static final int SPRITE_HEIGHT = 40; // Height of each sprite
 
-    private static final int TOTAL_SPRITES = 11; // Total number of sprites
+    private static final int TOTAL_SPRITES = 3; // Total number of sprites
     private static final int FRAME_DELAY = 100; // Delay between frames in milliseconds
     private int xPosition = 0; // Initial X position of the sprite
     private int yPosition = 0; // Initial Y position of the sprite
@@ -32,7 +32,7 @@ public class CenterSpriteTool extends JPanel implements KeyListener {
             // Load the sprite sheet
             // Note if you get an error reading the file load it from your poject root
             // remove path / or res/ just do "file.png"
-            spriteSheet = ImageIO.read(new File("BatttyBats_64pixX9.png")); // Replace with your file path
+            spriteSheet = ImageIO.read(new File("YelloBirdsColorsx64.png")); // Replace with your file path
             // Extract individual sprites from the sprite sheet
             sprites = new BufferedImage[TOTAL_SPRITES];
             for (int i = 0; i < TOTAL_SPRITES; i++) {

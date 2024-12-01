@@ -29,9 +29,9 @@ public class LoadSave {
 
    // public static final String PLAYER_ATLAS = "eagle_Linear_Sheet_Fixed.png";
     public static final String PLAYER_EAGLE = "eagle_Linear_Sheet_New.png"; // Using 64 pixel by 12 birds
-    public static final String PLAYER_PIRATE = "player_sprites.png";
-    public static final String PLAYER_ORC = "player_orc.png";
-    public static final String PLAYER_SOLDIER = "player_soldier.png";
+    public static final String PLAYER_BAT = "BaddyBats_64pixX9.png";
+    public static final String PLAYER_YELLOWBIRD = "YelloBirdsColorsx64.png";
+    public static final String PLAYER_REDBIRD = "YelloBirdsColorsx64.png";
     public static final String LEVEL_ATLAS = "outside_sprites.png";
     public static final String MENU_BUTTONS = "button_atlas.png";
     public static final String MENU_BACKGROUND = "menu_background.png";
@@ -80,11 +80,14 @@ public class LoadSave {
     public static final String SHIP = "ship.png";
 
     public static BufferedImage[][] loadAnimations(PlayerCharacter pc) {
+        System.out.println("Loading animations pc   " + pc);
         BufferedImage img = LoadSave.GetSpriteAtlas(pc.playerAtlas);
         BufferedImage[][] animations = new BufferedImage[pc.numRows][pc.numColms];
         for (int j = 0; j < animations.length; j++)
-            for (int i = 0; i < animations[j].length; i++)
+            for (int i = 0; i < animations[j].length; i++) {
+                System.out.println("animations[j][i] =" + animations[j][i]);
                 animations[j][i] = img.getSubimage((i * pc.spriteW) + pc.centerPixelOffset, j * pc.spriteH, pc.spriteW, pc.spriteH);
+            }
         return animations;
     }
 

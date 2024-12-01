@@ -12,17 +12,17 @@ public enum PlayerCharacter {
             0, 0, 0, 0, 0, 0, 0,
             LoadSave.PLAYER_EAGLE, 10, 1, 11, 72, 70,
             40, 30, 21, 25),
-    BAT(9, 9, 9, 9, 1, 1, 1,
+    BAT(8, 8, 8, 8, 1, 1, 1,
             0, 0, 0, 0, 0, 0, 0,
-            LoadSave.PLAYER_PIRATE, 0, 1, 11, 64, 96,
+            LoadSave.PLAYER_BAT, 13, 1, 8, 72, 96,
             30, 25, 21, 25),
-    ORC(6, 8, 8, 8, 6, 4, 4,
-            0, 1, 1, 1, 2, 4, 5,
-            LoadSave.PLAYER_ORC, 0, 6, 8, 100, 100,
+    YELLOWBIRD(3, 3, 3, 3, 3, 1, 1,
+            0, 0, 0, 0, 0, 0, 0,
+            LoadSave.PLAYER_YELLOWBIRD, 0, 4, 3, 58, 40,
             13, 15, 44, 42),
-    SOLDIER(6, 8, 8, 8, 6, 4, 4,
-            0, 1, 1, 1, 2, 5, 6,
-            LoadSave.PLAYER_SOLDIER, 0, 7, 8, 100, 100,
+    REDBIRD(3, 3, 3, 3, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1,
+            LoadSave.PLAYER_REDBIRD, 0, 4, 3, 58, 40,
             12, 18, 44, 39);
 
     // Instead of affecting the other characters we will equate RUNNING == FLYING for bird characters.
@@ -39,7 +39,7 @@ public enum PlayerCharacter {
 
     /*
      private float xDrawOffset = 21 * FlappyGame.SCALE;
-    private float yDrawOffset = 4 * FlappyGame.SCALE;
+     private float yDrawOffset = 4 * FlappyGame.SCALE;
      */
 
     PlayerCharacter(int spriteA_IDLE, int spriteA_RUNNING, int spriteA_JUMP, int spriteA_FALLING, int spriteA_ATTACK, int spriteA_HIT, int spriteA_DEAD,

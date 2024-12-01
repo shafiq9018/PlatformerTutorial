@@ -29,16 +29,16 @@ public class Credits extends State implements Statemethods {
 
     private void loadEntities() {
         entitiesList = new ArrayList<>();
-        entitiesList.add(new ShowEntity(getIdleAni(LoadSave.GetSpriteAtlas(LoadSave.PLAYER_PIRATE), 5, 64, 40), (int) (FlappyGame.GAME_WIDTH * 0.05), (int) (FlappyGame.GAME_HEIGHT * 0.8)));
-        entitiesList.add(new ShowEntity(getIdleAni(LoadSave.GetSpriteAtlas(LoadSave.CRABBY_SPRITE), 9, 72, 32), (int) (FlappyGame.GAME_WIDTH * 0.15), (int) (FlappyGame.GAME_HEIGHT * 0.75)));
-        entitiesList.add(new ShowEntity(getIdleAni(LoadSave.GetSpriteAtlas(LoadSave.PINKSTAR_ATLAS), 8, 34, 30), (int) (FlappyGame.GAME_WIDTH * 0.7), (int) (FlappyGame.GAME_HEIGHT * 0.75)));
-        entitiesList.add(new ShowEntity(getIdleAni(LoadSave.GetSpriteAtlas(LoadSave.SHARK_ATLAS), 8, 34, 30), (int) (FlappyGame.GAME_WIDTH * 0.8), (int) (FlappyGame.GAME_HEIGHT * 0.8)));
+        entitiesList.add(new ShowEntity(getIdleAni(LoadSave.GetSpriteAtlas(LoadSave.PLAYER_EAGLE), 20, 11, 72, 70), 50,20));
+        entitiesList.add(new ShowEntity(getIdleAni(LoadSave.GetSpriteAtlas(LoadSave.PLAYER_BAT), 20,  9, 72, 96),50,200));
+        entitiesList.add(new ShowEntity(getIdleAni(LoadSave.GetSpriteAtlas(LoadSave.PLAYER_YELLOWBIRD), 0, 3, 58, 40),1000, 100));
+        // entitiesList.add(new ShowEntity(getIdleAni(LoadSave.GetSpriteAtlas(LoadSave.PLAYER_REDBIRD), 0, 3, 58, 40), 1000, 300));
     }
 
-    private BufferedImage[] getIdleAni(BufferedImage atlas, int spritesAmount, int width, int height) {
+    private BufferedImage[] getIdleAni(BufferedImage atlas, int centerOffset, int spritesAmount, int width, int height) {
         BufferedImage[] arr = new BufferedImage[spritesAmount];
         for (int i = 0; i < spritesAmount; i++)
-            arr[i] = atlas.getSubimage(width * i, 0, width, height);
+            arr[i] = atlas.getSubimage(width * i + centerOffset, 0, width, height);
         return arr;
     }
 
